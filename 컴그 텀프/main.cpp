@@ -1,0 +1,119 @@
+#include <gl/glew.h>
+#include <gl/freeglut.h>
+
+#include "Shader.h"                // shaderProgramID 생성
+#include "ShapeBuffer.h"           // Stick/Pyramid VAO 생성
+
+#include "Stick.h"
+#include "Pyramid.h"
+#include "PyramidWall.h"
+#include "BasicObstacle.h"
+
+#pragma comment(lib, "opengl32.lib")
+#pragma comment(lib, "glew32.lib")
+#pragma comment(lib, "freeglut.lib")
+#pragma warning(disable: 4711 4710 4100)
+
+GLuint shaderProgramID;
+float lastTime = 0.0f;
+
+// 전역 장애물 벡터 정의
+std::vector<PyramidWall> rotating_obstacle;
+std::vector<BasicObstacle> basic_obstacle;
+
+void drawScene()
+{
+    // ------------------------------
+    // 배경색: 흰색
+    // ------------------------------
+    glClearColor(1.0f, 1.0f, 1.0f, 1.0f);     //  흰색 배경
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    glUseProgram(shaderProgramID);
+
+    glm::mat4 view = glm::lookAt(
+        glm::vec3(0, 1.5f, 4),        // 카메라 위치
+        glm::vec3(0, 0, 0),           // 카메라가 바라보는 지점
+        glm::vec3(0, 1, 0)            // 업벡터
+    );
+
+    glm::mat4 proj = glm::perspective(
+        glm::radians(60.0f),
+        1280.0f / 960.0f,
+        0.1f,
+        100.0f
+    );
+
+    GLuint mvpLoc = glGetUniformLocation(shaderProgramID, "mvp");
+
+
+    // ------------------------------
+    // 장애물 그리기
+    // ------------------------------
+    for (auto& w : rotating_obstacle)
+        w.Draw(view, proj, mvpLoc);
+
+    for (auto& w : basic_obstacle)
+        w.Draw(view, proj, mvpLoc);
+
+
+    glutSwapBuffers();
+}
+
+void Timer(int)
+{
+    float currentTime = glutGet(GLUT_ELAPSED_TIME) * 0.001f;  // ms → sec
+    float dt = currentTime - lastTime;
+    lastTime = currentTime;
+
+    for (auto& w : rotating_obstacle)
+        w.Update(dt);       //  회전 애니메이션 업데이트
+
+    for (auto& w : basic_obstacle)
+        w.Update(dt);       //  회전 애니메이션 업데이트
+
+    glutPostRedisplay();
+    glutTimerFunc(16, Timer, 0);
+}
+
+int main(int argc, char** argv)
+{
+   
+    glutInit(&argc, argv);
+    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH);
+    glutInitWindowSize(1280, 960);
+    glutInitWindowPosition(100, 100);
+    glutCreateWindow("Rotating Obstacle Test");
+    glewExperimental = GL_TRUE;
+    if (glewInit() != GLEW_OK)
+    {
+        printf("GLEW 초기화 실패!\n");
+        return -1;
+    }
+    shaderProgramID = make_shaderProgram();
+    glUseProgram(shaderProgramID);
+
+
+    // Stick, Pyramid VAO 생성
+    InitStickModel();
+    InitPyramidModel();
+
+
+    // ------------------------------
+    // 화면에 보일 테스트용 장애물 추가
+    // ------------------------------
+    // rotating_obstacle ((위치 x,y,z) , 직사각형 길이, 가시 간격, 각도) 
+    // 
+    rotating_obstacle.push_back(PyramidWall(glm::vec3(0, 0, 0), 3.0f, 0.7f));       // push_back -> 동적으로 맨뒤에 요소 추가
+    rotating_obstacle.push_back(PyramidWall(glm::vec3(0, 0, 0), 3.0f, 0.7f, 90.0f));
+    basic_obstacle.push_back(BasicObstacle(glm::vec3(0, 0, 0), 3.0f, 0.5f));          // push_back -> 동적으로 맨뒤에 요소 추가
+
+
+    glEnable(GL_DEPTH_TEST);
+    glutDisplayFunc(drawScene);
+    glutReshapeFunc([](int w, int h) { glViewport(0, 0, w, h); });
+    glutTimerFunc(0, Timer, 0);
+    // 메인 루프
+    glutMainLoop();
+    return 0;
+}
