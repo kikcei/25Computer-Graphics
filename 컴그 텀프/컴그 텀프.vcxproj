@@ -124,31 +124,31 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="cpp 파일\BasicObstacle.cpp" />
-    <ClCompile Include="cpp 파일\Floor.cpp" />
-    <ClCompile Include="cpp 파일\main.cpp" />
-    <ClCompile Include="cpp 파일\Matrix.cpp" />
-    <ClCompile Include="cpp 파일\OBJLoader.cpp" />
-    <ClCompile Include="cpp 파일\Pyramid.cpp" />
-    <ClCompile Include="cpp 파일\PyramidWall.cpp" />
-    <ClCompile Include="cpp 파일\Shader.cpp" />
-    <ClCompile Include="cpp 파일\ShapeBuffer.cpp" />
-    <ClCompile Include="cpp 파일\Stick.cpp" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="fragment.glsl" />
     <None Include="vertex.glsl" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="h 파일\BasicObstacle.h" />
-    <ClInclude Include="h 파일\Floor.h" />
-    <ClInclude Include="h 파일\Matrix.h" />
-    <ClInclude Include="h 파일\OBJLoader.h" />
-    <ClInclude Include="h 파일\Pyramid.h" />
-    <ClInclude Include="h 파일\PyramidWall.h" />
-    <ClInclude Include="h 파일\Shader.h" />
-    <ClInclude Include="h 파일\ShapeBuffer.h" />
-    <ClInclude Include="h 파일\Stick.h" />
+    <ClInclude Include="BasicObstacle.h" />
+    <ClInclude Include="Floor.h" />
+    <ClInclude Include="Matrix.h" />
+    <ClInclude Include="OBJLoader.h" />
+    <ClInclude Include="Pyramid.h" />
+    <ClInclude Include="PyramidWall.h" />
+    <ClInclude Include="Shader.h" />
+    <ClInclude Include="ShapeBuffer.h" />
+    <ClInclude Include="Stick.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="소스 파일\BasicObstacle.cpp" />
+    <ClCompile Include="소스 파일\Floor.cpp" />
+    <ClCompile Include="소스 파일\main.cpp" />
+    <ClCompile Include="소스 파일\Matrix.cpp" />
+    <ClCompile Include="소스 파일\OBJLoader.cpp" />
+    <ClCompile Include="소스 파일\Pyramid.cpp" />
+    <ClCompile Include="소스 파일\PyramidWall.cpp" />
+    <ClCompile Include="소스 파일\Shader.cpp" />
+    <ClCompile Include="소스 파일\ShapeBuffer.cpp" />
+    <ClCompile Include="소스 파일\Stick.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
