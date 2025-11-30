@@ -15,28 +15,34 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="cpp 파일\BasicObstacle.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="ShapeBuffer.cpp">
+    <ClCompile Include="cpp 파일\Floor.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Stick.cpp">
+    <ClCompile Include="cpp 파일\main.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Pyramid.cpp">
+    <ClCompile Include="cpp 파일\Matrix.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="PyramidWall.cpp">
+    <ClCompile Include="cpp 파일\OBJLoader.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Shader.cpp">
+    <ClCompile Include="cpp 파일\Pyramid.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="BasicObstacle.cpp">
+    <ClCompile Include="cpp 파일\PyramidWall.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="Floor.cpp">
+    <ClCompile Include="cpp 파일\Shader.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="cpp 파일\ShapeBuffer.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="cpp 파일\Stick.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
@@ -49,25 +55,31 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ShapeBuffer.h">
+    <ClInclude Include="h 파일\BasicObstacle.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Stick.h">
+    <ClInclude Include="h 파일\Floor.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Pyramid.h">
+    <ClInclude Include="h 파일\Matrix.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="PyramidWall.h">
+    <ClInclude Include="h 파일\OBJLoader.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Shader.h">
+    <ClInclude Include="h 파일\Pyramid.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="BasicObstacle.h">
+    <ClInclude Include="h 파일\PyramidWall.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Floor.h">
+    <ClInclude Include="h 파일\Shader.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="h 파일\ShapeBuffer.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="h 파일\Stick.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
