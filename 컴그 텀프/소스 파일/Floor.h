@@ -6,9 +6,9 @@
 
 class Floor {
 public:
-    glm::vec3 pos;     // 위치
-    glm::vec3 size;    // 스케일
+    glm::vec3 pos;     
+    glm::vec3 size;    
 
     Floor(glm::vec3 p, glm::vec3 s);
     void Draw(const glm::mat4& view, const glm::mat4& proj, GLuint mvpLoc);
-}; 
+};

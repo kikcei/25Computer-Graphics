@@ -128,15 +128,15 @@
     <None Include="vertex.glsl" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BasicObstacle.h" />
     <ClInclude Include="Floor.h" />
-    <ClInclude Include="Matrix.h" />
-    <ClInclude Include="OBJLoader.h" />
-    <ClInclude Include="Pyramid.h" />
-    <ClInclude Include="PyramidWall.h" />
-    <ClInclude Include="Shader.h" />
-    <ClInclude Include="ShapeBuffer.h" />
-    <ClInclude Include="Stick.h" />
+    <ClInclude Include="소스 파일\Matrix.h" />
+    <ClInclude Include="소스 파일\OBJLoader.h" />
+    <ClInclude Include="소스 파일\Pyramid.h" />
+    <ClInclude Include="소스 파일\PyramidWall.h" />
+    <ClInclude Include="소스 파일\Shader.h" />
+    <ClInclude Include="소스 파일\ShapeBuffer.h" />
+    <ClInclude Include="소스 파일\Stick.h" />
+    <ClInclude Include="BasicObstacle.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="소스 파일\BasicObstacle.cpp" />

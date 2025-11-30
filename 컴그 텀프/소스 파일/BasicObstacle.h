@@ -20,4 +20,4 @@ public:
     BasicObstacle(glm::vec3 pos, float length, float spacing, float initialAngle = 0.0f);
     void Draw(const glm::mat4& view, const glm::mat4& proj, GLuint mvpLoc);
     void Update(float Time);
-};
+}; 
