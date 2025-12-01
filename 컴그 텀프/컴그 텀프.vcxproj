@@ -130,6 +130,7 @@
   <ItemGroup>
     <ClCompile Include="BasicObstacle.cpp" />
     <ClCompile Include="Floor.cpp" />
+    <ClCompile Include="Game_Manager.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Matrix.cpp" />
     <ClCompile Include="OBJLoader.cpp" />
@@ -143,7 +144,7 @@
     <ClInclude Include="BasicObstacle.h" />
     <ClInclude Include="Floor.h" />
     <ClInclude Include="Matrix.h" />
-    <ClInclude Include="Object_Manager.h" />
+    <ClInclude Include="Game_Manager.h" />
     <ClInclude Include="OBJLoader.h" />
     <ClInclude Include="Pyramid.h" />
     <ClInclude Include="PyramidWall.h" />

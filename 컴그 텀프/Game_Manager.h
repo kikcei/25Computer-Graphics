@@ -6,7 +6,7 @@
 #include "BasicObstacle.h"
 #include "Floor.h"
 
-class ObjectManager
+class GameManager
 {
 public:
     Floor basicFloor;
@@ -14,8 +14,7 @@ public:
     std::vector<BasicObstacle_Right> basicRight;
     std::vector<BasicObstacle_Left> basicLeft;
 
-    ObjectManager();
-
+    GameManager();
     void LoadStage(int stage);
     void Update(float dt);
     void Draw(const glm::mat4& view,const glm::mat4& proj,GLuint mvpLoc);
