@@ -48,7 +48,7 @@ void GameManager::Draw(const glm::mat4& view,
     GLuint mvpLoc)
 {
     // 바닥 먼저 렌더링
-    basicFloor.Draw(view, proj, mvpLoc);
+    basicFloor.Draw(view, proj);
 
     // 회전형 장애물
     for (auto& w : rotatingObstacle)

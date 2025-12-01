@@ -5,6 +5,12 @@ char* filetobuf(const char* file);
 void make_vertexShaders();
 void make_fragmentShaders();
 GLuint make_shaderProgram();
+
+// ----- ÅØ½ºÃÄ -----
+GLuint loadTextureShader(const char* vertexPath, const char* fragmentPath);
+GLuint LoadTexture(const char* filePath);
+
+// ----- Obj ------
 GLuint LoadShader(const char* vpath, const char* fpath);
 
 extern GLuint vertexShader;

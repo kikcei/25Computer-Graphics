@@ -10,7 +10,7 @@ GLuint vbo_pyramid[2];
 GLuint ebo_pyramid;
 
 GLuint vao_floor;
-GLuint vbo_floor[2];
+GLuint vbo_floor;
 GLuint ebo_floor;
 
 // ======================================================
@@ -156,76 +156,45 @@ void UpdatePyramidColor(float r, float g, float b)
     glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(pyramidColors), pyramidColors);
 }
 
+
 // ======================================================
-// Floor Geometry
+// Floor (윗면 텍스처 전용)
 // ======================================================
 
-GLfloat floorVertices[8][3] =
+// pos(x,y,z), uv(u,v)
+GLfloat floorVertices[] =
 {
-    {-0.5f, -0.5f, -0.5f},
-    { 0.5f, -0.5f, -0.5f},
-    { 0.5f,  0.5f, -0.5f},
-    {-0.5f,  0.5f, -0.5f},
-    {-0.5f, -0.5f,  0.5f},
-    { 0.5f, -0.5f,  0.5f},
-    { 0.5f,  0.5f,  0.5f},
-    {-0.5f,  0.5f,  0.5f}
+    //   position           uv
+    -0.5f, 0.0f, -0.5f,     0.0f, 0.0f,   // 0
+     0.5f, 0.0f, -0.5f,     1.0f, 0.0f,   // 1
+     0.5f, 0.0f,  0.5f,     1.0f, 1.0f,   // 2
+    -0.5f, 0.0f,  0.5f,     0.0f, 1.0f    // 3
 };
 
 GLuint floorIndices[] =
 {
-    0,1,2, 2,3,0,
-    4,5,6, 6,7,4,
-    0,4,7, 7,3,0,
-    1,5,6, 6,2,1,
-    3,2,6, 6,7,3,
-    0,1,5, 5,4,0
+    0, 1, 2,
+    2, 3, 0
 };
-
-GLfloat floorColors[8][3];
-
 
 void InitFloorModel()
 {
-    for (int i = 0; i < 5; i++)
-    {
-        floorColors[i][0] = 0.55f;
-        floorColors[i][1] = 0.75f;
-        floorColors[i][2] = 0.55f;
-    }
-
     glGenVertexArrays(1, &vao_floor);
     glBindVertexArray(vao_floor);
 
-    glGenBuffers(2, vbo_floor);
-    glGenBuffers(1, &ebo_floor);
-
-    // 위치
-    glBindBuffer(GL_ARRAY_BUFFER, vbo_floor[0]);
+    glGenBuffers(1, &vbo_floor);
+    glBindBuffer(GL_ARRAY_BUFFER, vbo_floor);
     glBufferData(GL_ARRAY_BUFFER, sizeof(floorVertices), floorVertices, GL_STATIC_DRAW);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
-    glEnableVertexAttribArray(0);
 
-    // 색상
-    glBindBuffer(GL_ARRAY_BUFFER, vbo_floor[1]);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(floorColors), floorColors, GL_DYNAMIC_DRAW);
-    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, 0);
-    glEnableVertexAttribArray(1);
-
-    // 인덱스 버퍼
+    glGenBuffers(1, &ebo_floor);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo_floor);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(floorIndices), floorIndices, GL_STATIC_DRAW);
-}
 
-void UpdateFloorColor(float r, float g, float b)
-{
-    for (int i = 0; i < 5; i++)
-    {
-        floorColors[i][0] = r;
-        floorColors[i][1] = g;
-        floorColors[i][2] = b;
-    }
+    // position (location = 0)
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
+    glEnableVertexAttribArray(0);
 
-    glBindBuffer(GL_ARRAY_BUFFER, vbo_floor[1]);
-    glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(floorColors), floorColors);
+    // UV (location = 1)
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+    glEnableVertexAttribArray(1);
 }

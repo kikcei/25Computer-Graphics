@@ -30,8 +30,7 @@ void UpdatePyramidColor(float r, float g, float b);
 // Floor (¹Ù´Ú ¸ðµ¨)
 // ==============================
 extern GLuint vao_floor;
-extern GLuint vbo_floor[2];
+extern GLuint vbo_floor;
 extern GLuint ebo_floor;
 
 void InitFloorModel();
-void UpdateFloorColor(float r, float g, float b);

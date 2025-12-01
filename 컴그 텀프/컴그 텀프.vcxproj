@@ -125,6 +125,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="fragment.glsl" />
+    <None Include="texture_fragment.glsl" />
+    <None Include="texture_vertex.glsl" />
     <None Include="vertex.glsl" />
   </ItemGroup>
   <ItemGroup>
@@ -150,6 +152,7 @@
     <ClInclude Include="PyramidWall.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="ShapeBuffer.h" />
+    <ClInclude Include="stb_image.h" />
     <ClInclude Include="Stick.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

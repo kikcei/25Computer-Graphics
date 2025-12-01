@@ -5,6 +5,7 @@
 #include "ShapeBuffer.h"           // Stick/Pyramid VAO »ý¼º
 #include "Game_Manager.h"
 
+// ----- °´Ã¼ -----
 #include "Floor.h"
 #include "Stick.h"
 #include "Pyramid.h"
@@ -79,6 +80,8 @@ int main(int argc, char** argv)
         return -1;
     }
     shaderProgramID = make_shaderProgram();
+    floorShaderID = loadTextureShader("texture_vertex.glsl", "texture_fragment.glsl");
+    floorTexture = LoadTexture("water.png");
     glUseProgram(shaderProgramID);
 
 
