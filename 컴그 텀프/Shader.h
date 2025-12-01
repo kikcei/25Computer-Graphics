@@ -15,3 +15,6 @@ GLuint LoadShader(const char* vpath, const char* fpath);
 
 extern GLuint vertexShader;
 extern GLuint fragmentShader;
+
+extern GLuint shaderProgramID;
+extern GLuint floorShaderID;

@@ -18,6 +18,7 @@
 #pragma warning(disable: 4711 4710 4100)
 
 GLuint shaderProgramID;
+
 float lastTime = 0.0f;
 
 //------------------------------
@@ -31,7 +32,6 @@ void drawScene()
     glClearColor(1.0f, 1.0f, 1.0f, 1.0f);     //  흰색 배경
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    glUseProgram(shaderProgramID);
 
 	glm::mat4 view = glm::lookAt(glm::vec3(0, 2.0f, 4), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
     glm::mat4 proj = glm::perspective(glm::radians(60.0f),1280.0f / 960.0f,0.1f,100.0f);
@@ -79,16 +79,15 @@ int main(int argc, char** argv)
         printf("GLEW 초기화 실패!\n");
         return -1;
     }
+
     shaderProgramID = make_shaderProgram();
     floorShaderID = loadTextureShader("texture_vertex.glsl", "texture_fragment.glsl");
     floorTexture = LoadTexture("water.png");
+    
     glUseProgram(shaderProgramID);
-
-
-    // Stick, Pyramid VAO 생성
     InitStickModel();
     InitPyramidModel();
-	InitFloorModel( );
+    InitFloorModel();
 
     gamemanager.LoadStage(1);
 

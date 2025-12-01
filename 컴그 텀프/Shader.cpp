@@ -10,6 +10,11 @@
 #include <sstream>
 #include <string>
 
+GLuint vertexShader;
+GLuint fragmentShader;
+
+GLuint ShaderprogramID;
+
 
 char* filetobuf(const char* file)
 {
@@ -30,9 +35,6 @@ char* filetobuf(const char* file)
     buf[length] = 0;
     return buf;
 }
-
-GLuint vertexShader;
-GLuint fragmentShader;
 
 void make_vertexShaders()
 {
@@ -101,17 +103,14 @@ GLuint make_shaderProgram()
     return shaderID;
 }
 
+// ----------------------------------------
+// 텍스처 전용 셰이더 로딩
+// ----------------------------------------
 GLuint loadTextureShader(const char* vertexPath, const char* fragmentPath)
 {
-    // ------------------------------
-    // 1. 파일 읽기
-    // ------------------------------
     GLchar* vertexSource = filetobuf(vertexPath);
     GLchar* fragmentSource = filetobuf(fragmentPath);
 
-    // ------------------------------
-    // 2. 셰이더 생성
-    // ------------------------------
     GLuint vertexShader = glCreateShader(GL_VERTEX_SHADER);
     glShaderSource(vertexShader, 1, &vertexSource, NULL);
     glCompileShader(vertexShader);
@@ -120,25 +119,25 @@ GLuint loadTextureShader(const char* vertexPath, const char* fragmentPath)
     glShaderSource(fragmentShader, 1, &fragmentSource, NULL);
     glCompileShader(fragmentShader);
 
-    // ------------------------------
-    // 3. 프로그램 링크
-    // ------------------------------
     GLuint programID = glCreateProgram();
     glAttachShader(programID, vertexShader);
     glAttachShader(programID, fragmentShader);
     glLinkProgram(programID);
 
-    // ------------------------------
-    // 4. 메모리 정리
-    // ------------------------------
     glDeleteShader(vertexShader);
     glDeleteShader(fragmentShader);
     free(vertexSource);
     free(fragmentSource);
 
+    // 텍스처 셰이더가 OpenGL의 현재 active shader로 남지 않도록 반드시 해제
+    glUseProgram(0);
+
     return programID;
 }
 
+// ----------------------------------------
+// 텍스처 로딩
+// ----------------------------------------
 GLuint LoadTexture(const char* filePath)
 {
     int width, height, channels;
@@ -153,22 +152,18 @@ GLuint LoadTexture(const char* filePath)
     glGenTextures(1, &texID);
     glBindTexture(GL_TEXTURE_2D, texID);
 
-    // Wrap 옵션
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 
-    // Filtering 옵션
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-    // 실제 텍스처 데이터 업로드
     glTexImage2D(
         GL_TEXTURE_2D, 0, GL_RGBA,
         width, height, 0,
         GL_RGBA, GL_UNSIGNED_BYTE, image
     );
 
-    // 메모리 해제
     stbi_image_free(image);
 
     return texID;

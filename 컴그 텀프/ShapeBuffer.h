@@ -6,6 +6,8 @@
 #include <gl/glm/ext.hpp>
 #include <gl/glm/gtc/matrix_transform.hpp>
 
+extern GLuint shaderProgramID;     // 다른 객체들이 사용할 쉐이더
+
 // ==============================
 // Stick (직사각형 모델)
 // ==============================

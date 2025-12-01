@@ -1,4 +1,5 @@
 #include "Game_Manager.h"
+#include "ShapeBuffer.h"
 
 GameManager::GameManager()
     : basicFloor(glm::vec3(0, 0, -8), glm::vec3(5.0f, 0.3f, 20.0f))
@@ -43,9 +44,7 @@ void GameManager::Update(float dt)
         w.Update_Left(dt);
 }
 
-void GameManager::Draw(const glm::mat4& view,
-    const glm::mat4& proj,
-    GLuint mvpLoc)
+void GameManager::Draw(const glm::mat4& view, const glm::mat4& proj, GLuint mvpLoc)
 {
     // ¹Ù´Ú ¸ÕÀú ·»´õ¸µ
     basicFloor.Draw(view, proj);

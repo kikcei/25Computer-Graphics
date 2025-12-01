@@ -1,4 +1,5 @@
 #include "ShapeBuffer.h"
+#include "Shader.h"
 #include <gl/glm/glm.hpp>
 
 GLuint vao_stick;
@@ -42,6 +43,7 @@ GLfloat stickColors[8][3];
 
 void InitStickModel()
 {
+    glUseProgram(shaderProgramID);
     // 기본 색상
     for (int i = 0; i < 8; i++)
     {
@@ -113,6 +115,7 @@ GLfloat pyramidColors[5][3];
 
 void InitPyramidModel()
 {
+    glUseProgram(shaderProgramID);
     for (int i = 0; i < 5; i++)
     {
         pyramidColors[i][0] = 0.55f;
@@ -179,6 +182,7 @@ GLuint floorIndices[] =
 
 void InitFloorModel()
 {
+    glUseProgram(shaderProgramID);
     glGenVertexArrays(1, &vao_floor);
     glBindVertexArray(vao_floor);
 

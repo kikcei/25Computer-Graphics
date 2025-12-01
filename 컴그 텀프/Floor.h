@@ -4,7 +4,6 @@
 #include <gl/glm/glm.hpp>
 #include <gl/glm/gtc/matrix_transform.hpp>
 
-extern GLuint textureID;
 extern GLuint floorShaderID;
 extern GLuint floorTexture;
 
