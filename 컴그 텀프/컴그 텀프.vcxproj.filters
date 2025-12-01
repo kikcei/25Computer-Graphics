@@ -43,10 +43,10 @@
     <ClInclude Include="소스 파일\Stick.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="BasicObstacle.h">
+    <ClInclude Include="소스 파일\BasicObstacle.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="Floor.h">
+    <ClInclude Include="소스 파일\Floor.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

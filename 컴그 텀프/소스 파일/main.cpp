@@ -4,6 +4,7 @@
 #include "Shader.h"                // shaderProgramID 생성
 #include "ShapeBuffer.h"           // Stick/Pyramid VAO 생성
 
+#include "Floor.h"
 #include "Stick.h"
 #include "Pyramid.h"
 #include "PyramidWall.h"
@@ -20,6 +21,7 @@ float lastTime = 0.0f;
 // 전역 장애물 벡터 정의
 std::vector<PyramidWall> rotating_obstacle;
 std::vector<BasicObstacle> basic_obstacle;
+Floor basic_floor(glm::vec3(0, 0, 0), glm::vec3(5.0f, 0.3f, 5.0f));
 
 void drawScene()
 {
@@ -31,25 +33,17 @@ void drawScene()
 
     glUseProgram(shaderProgramID);
 
-    glm::mat4 view = glm::lookAt(
-        glm::vec3(0, 1.5f, 4),        // 카메라 위치
-        glm::vec3(0, 0, 0),           // 카메라가 바라보는 지점
-        glm::vec3(0, 1, 0)            // 업벡터
-    );
-
-    glm::mat4 proj = glm::perspective(
-        glm::radians(60.0f),
-        1280.0f / 960.0f,
-        0.1f,
-        100.0f
-    );
-
+	glm::mat4 view = glm::lookAt(glm::vec3(0, 2.0f, 4), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
+    glm::mat4 proj = glm::perspective(glm::radians(60.0f),1280.0f / 960.0f,0.1f,100.0f);
     GLuint mvpLoc = glGetUniformLocation(shaderProgramID, "mvp");
 
 
     // ------------------------------
     // 장애물 그리기
     // ------------------------------
+	
+	basic_floor.Draw(view, proj, mvpLoc);
+
     for (auto& w : rotating_obstacle)
         w.Draw(view, proj, mvpLoc);
 
@@ -76,6 +70,17 @@ void Timer(int)
     glutTimerFunc(16, Timer, 0);
 }
 
+void keyboard(unsigned char key, int x, int y)
+{
+	switch (key)
+	{
+	case 'q':
+		exit(0);
+		break;
+	}
+}
+
+
 int main(int argc, char** argv)
 {
    
@@ -97,20 +102,17 @@ int main(int argc, char** argv)
     // Stick, Pyramid VAO 생성
     InitStickModel();
     InitPyramidModel();
+	InitFloorModel( );
 
-
-    // ------------------------------
-    // 화면에 보일 테스트용 장애물 추가
-    // ------------------------------
     // rotating_obstacle ((위치 x,y,z) , 직사각형 길이, 가시 간격, 각도) 
-    // 
-    rotating_obstacle.push_back(PyramidWall(glm::vec3(0, 0, 0), 3.0f, 0.7f));       // push_back -> 동적으로 맨뒤에 요소 추가
-    rotating_obstacle.push_back(PyramidWall(glm::vec3(0, 0, 0), 3.0f, 0.7f, 90.0f));
-    basic_obstacle.push_back(BasicObstacle(glm::vec3(0, 0, 0), 3.0f, 0.5f));          // push_back -> 동적으로 맨뒤에 요소 추가
-
+    //rotating_obstacle.push_back(PyramidWall(glm::vec3(0, 0, 0), 3.0f, 0.7f));       // push_back -> 동적으로 맨뒤에 요소 추가
+    //rotating_obstacle.push_back(PyramidWall(glm::vec3(0, 0, 0), 3.0f, 0.7f, 90.0f));
+    basic_obstacle.push_back(BasicObstacle(glm::vec3(2, 0.15, 0), 3.0f, 0.5f));          // push_back -> 동적으로 맨뒤에 요소 추가
+	basic_obstacle.push_back(BasicObstacle(glm::vec3(-2, 0.15, 0), 3.0f, 0.5f));
 
     glEnable(GL_DEPTH_TEST);
     glutDisplayFunc(drawScene);
+	glutKeyboardFunc(keyboard);
     glutReshapeFunc([](int w, int h) { glViewport(0, 0, w, h); });
     glutTimerFunc(0, Timer, 0);
     // 메인 루프
