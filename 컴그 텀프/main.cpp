@@ -43,7 +43,9 @@ void drawScene()
     // ------------------------------
     // 장애물 그리기
     // ------------------------------
-	
+
+		
+//============================================================================================	
 	basic_floor.Draw(view, proj, mvpLoc);
 
     for (auto& w : rotating_obstacle)
@@ -54,6 +56,7 @@ void drawScene()
 
 	for (auto& w : basic_obstacle_left)
 		w.Draw_Left(view, proj, mvpLoc);
+//============================================================================================	
 
     glutSwapBuffers();
 }
@@ -64,6 +67,7 @@ void Timer(int)
     float dt = currentTime - lastTime;
     lastTime = currentTime;
 
+	
     for (auto& w : rotating_obstacle)
         w.Update(dt);       //  회전 애니메이션 업데이트
 
@@ -116,6 +120,10 @@ int main(int argc, char** argv)
     //rotating_obstacle.push_back(PyramidWall(glm::vec3(0, 0, 0), 3.0f, 0.7f, 90.0f));
     basic_obstacle_right.push_back(BasicObstacle_Right(glm::vec3(2, 0.1, 0), 3.0f, 0.5f));          // push_back -> 동적으로 맨뒤에 요소 추가
 	basic_obstacle_left.push_back(BasicObstacle_Left(glm::vec3(-2, 0.1, 0), 3.0f, 0.5f));
+
+	basic_obstacle_right.push_back(BasicObstacle_Right(glm::vec3(2, 0.1, -3), 3.0f, 0.5f));          
+	basic_obstacle_left.push_back(BasicObstacle_Left(glm::vec3(-2, 0.1, -3), 3.0f, 0.5f));
+
 
     glEnable(GL_DEPTH_TEST);
     glutDisplayFunc(drawScene);

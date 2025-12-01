@@ -128,27 +128,28 @@
     <None Include="vertex.glsl" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="소스 파일\BasicObstacle.h" />
-    <ClInclude Include="소스 파일\Floor.h" />
-    <ClInclude Include="소스 파일\Matrix.h" />
-    <ClInclude Include="소스 파일\OBJLoader.h" />
-    <ClInclude Include="소스 파일\Pyramid.h" />
-    <ClInclude Include="소스 파일\PyramidWall.h" />
-    <ClInclude Include="소스 파일\Shader.h" />
-    <ClInclude Include="소스 파일\ShapeBuffer.h" />
-    <ClInclude Include="소스 파일\Stick.h" />
+    <ClCompile Include="BasicObstacle.cpp" />
+    <ClCompile Include="Floor.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Matrix.cpp" />
+    <ClCompile Include="OBJLoader.cpp" />
+    <ClCompile Include="Pyramid.cpp" />
+    <ClCompile Include="PyramidWall.cpp" />
+    <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="ShapeBuffer.cpp" />
+    <ClCompile Include="Stick.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="소스 파일\BasicObstacle.cpp" />
-    <ClCompile Include="소스 파일\Floor.cpp" />
-    <ClCompile Include="소스 파일\main.cpp" />
-    <ClCompile Include="소스 파일\Matrix.cpp" />
-    <ClCompile Include="소스 파일\OBJLoader.cpp" />
-    <ClCompile Include="소스 파일\Pyramid.cpp" />
-    <ClCompile Include="소스 파일\PyramidWall.cpp" />
-    <ClCompile Include="소스 파일\Shader.cpp" />
-    <ClCompile Include="소스 파일\ShapeBuffer.cpp" />
-    <ClCompile Include="소스 파일\Stick.cpp" />
+    <ClInclude Include="BasicObstacle.h" />
+    <ClInclude Include="Floor.h" />
+    <ClInclude Include="Matrix.h" />
+    <ClInclude Include="Object_Manager.h" />
+    <ClInclude Include="OBJLoader.h" />
+    <ClInclude Include="Pyramid.h" />
+    <ClInclude Include="PyramidWall.h" />
+    <ClInclude Include="Shader.h" />
+    <ClInclude Include="ShapeBuffer.h" />
+    <ClInclude Include="Stick.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
