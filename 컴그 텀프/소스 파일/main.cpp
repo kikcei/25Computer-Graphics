@@ -18,10 +18,12 @@
 GLuint shaderProgramID;
 float lastTime = 0.0f;
 
-// 전역 장애물 벡터 정의
+// 객체 정의
 std::vector<PyramidWall> rotating_obstacle;
-std::vector<BasicObstacle> basic_obstacle;
-Floor basic_floor(glm::vec3(0, 0, 0), glm::vec3(5.0f, 0.3f, 5.0f));
+std::vector<BasicObstacle_Right> basic_obstacle_right;
+std::vector<BasicObstacle_Left> basic_obstacle_left;
+
+Floor basic_floor(glm::vec3(0, 0, -8), glm::vec3(5.0f, 0.3f, 20.0f));
 
 void drawScene()
 {
@@ -47,9 +49,11 @@ void drawScene()
     for (auto& w : rotating_obstacle)
         w.Draw(view, proj, mvpLoc);
 
-    for (auto& w : basic_obstacle)
-        w.Draw(view, proj, mvpLoc);
+    for (auto& w : basic_obstacle_right)
+        w.Draw_Right(view, proj, mvpLoc);
 
+	for (auto& w : basic_obstacle_left)
+		w.Draw_Left(view, proj, mvpLoc);
 
     glutSwapBuffers();
 }
@@ -63,8 +67,11 @@ void Timer(int)
     for (auto& w : rotating_obstacle)
         w.Update(dt);       //  회전 애니메이션 업데이트
 
-    for (auto& w : basic_obstacle)
-        w.Update(dt);       //  회전 애니메이션 업데이트
+    for (auto& w : basic_obstacle_right)
+        w.Update_Right(dt);       //  회전 애니메이션 업데이트
+
+	for (auto& w : basic_obstacle_left)
+		w.Update_Left(dt);       //  회전 애니메이션 업데이트
 
     glutPostRedisplay();
     glutTimerFunc(16, Timer, 0);
@@ -107,8 +114,8 @@ int main(int argc, char** argv)
     // rotating_obstacle ((위치 x,y,z) , 직사각형 길이, 가시 간격, 각도) 
     //rotating_obstacle.push_back(PyramidWall(glm::vec3(0, 0, 0), 3.0f, 0.7f));       // push_back -> 동적으로 맨뒤에 요소 추가
     //rotating_obstacle.push_back(PyramidWall(glm::vec3(0, 0, 0), 3.0f, 0.7f, 90.0f));
-    basic_obstacle.push_back(BasicObstacle(glm::vec3(2, 0.15, 0), 3.0f, 0.5f));          // push_back -> 동적으로 맨뒤에 요소 추가
-	basic_obstacle.push_back(BasicObstacle(glm::vec3(-2, 0.15, 0), 3.0f, 0.5f));
+    basic_obstacle_right.push_back(BasicObstacle_Right(glm::vec3(2, 0.1, 0), 3.0f, 0.5f));          // push_back -> 동적으로 맨뒤에 요소 추가
+	basic_obstacle_left.push_back(BasicObstacle_Left(glm::vec3(-2, 0.1, 0), 3.0f, 0.5f));
 
     glEnable(GL_DEPTH_TEST);
     glutDisplayFunc(drawScene);

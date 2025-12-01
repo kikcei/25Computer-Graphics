@@ -9,7 +9,7 @@
 #include <gl/glm/gtc/matrix_transform.hpp>
 
 
-class BasicObstacle {
+class BasicObstacle_Right {
 public:
     Stick body;
     std::vector<Pyramid> spikes;
@@ -17,7 +17,20 @@ public:
     float angle = 0.0f;   // ← 회전값 추가!
     glm::vec3 rotationAxis = glm::vec3(0, 0, 1); // Z축 기준 회전
 
-    BasicObstacle(glm::vec3 pos, float length, float spacing, float initialAngle = 0.0f);
-    void Draw(const glm::mat4& view, const glm::mat4& proj, GLuint mvpLoc);
-    void Update(float Time);
+    BasicObstacle_Right(glm::vec3 pos, float length, float spacing, float initialAngle = 0.0f);
+    void Draw_Right(const glm::mat4& view, const glm::mat4& proj, GLuint mvpLoc);
+    void Update_Right(float Time);
 }; 
+
+class BasicObstacle_Left {
+public:
+	Stick body;
+	std::vector<Pyramid> spikes;
+
+	float angle = 0.0f;   // ← 회전값 추가!
+	glm::vec3 rotationAxis = glm::vec3(0, 0, 1); // Z축 기준 회전
+
+	BasicObstacle_Left(glm::vec3 pos, float length, float spacing, float initialAngle = 0.0f);
+	void Draw_Left(const glm::mat4& view, const glm::mat4& proj, GLuint mvpLoc);
+	void Update_Left(float Time);
+};
