@@ -18,7 +18,22 @@ void GameManager::LoadStage(int stage)
     if (stage == 1)
     {
         stageObjects = {
-        { FLOOR, { 0,0,-8 }, 5.0f, 20.0f }, // Floor: pos, length(X), spacing(Z)
+        { FLOOR, { 0,0,0}, 5.0f, 5.0f }, // Floor: pos, length(X), spacing(Z)
+        { FLOOR, { 0,0,-5}, 5.0f, 5.0f },
+        { FLOOR, { 0,0,-10}, 5.0f, 5.0f },
+        { FLOOR, { 0,0,-15}, 5.0f, 5.0f },
+        { FLOOR, { 0,0,-20}, 5.0f, 5.0f },
+        { FLOOR, { 0,0,-25}, 5.0f, 5.0f },
+        { FLOOR, { 0,0,-30}, 5.0f, 5.0f },
+        { FLOOR, { 0,0,-35}, 5.0f, 5.0f },
+        { FLOOR, { 0,0,-40}, 5.0f, 5.0f },
+        { FLOOR, { 0,0,-45}, 5.0f, 5.0f },
+        { FLOOR, { 0,0,-50}, 5.0f, 5.0f },
+        { FLOOR, { 0,0,-55}, 5.0f, 5.0f },
+        { FLOOR, { 0,0,-60}, 5.0f, 5.0f },
+        { FLOOR, { 0,0,-65}, 5.0f, 5.0f },
+        { FLOOR, { 0,0,-70}, 5.0f, 5.0f },
+
         { MOVE_RIGHT, { 2,0.1,0 },  3.0f, 0.5f },  // right move
         { MOVE_LEFT,  {-2,0.1,0 },  3.0f, 0.5f },  // left move
         { MOVE_RIGHT, { 2,0.1,-3 }, 3.0f, 0.5f },
@@ -35,7 +50,7 @@ void GameManager::LoadStage(int stage)
             break;
 
         case 1: // ROTATE
-            rotatingObstacle.emplace_back(o.pos, o.length, o.spacing);
+           // rotatingObstacle.emplace_back(o.pos, o.length, o.spacing);
             break;
 
         case 2: // LEFT MOVE

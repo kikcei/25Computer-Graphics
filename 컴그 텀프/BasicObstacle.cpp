@@ -15,17 +15,17 @@ BasicObstacle_Right::BasicObstacle_Right(glm::vec3 pos, float length, float spac
         float offset = (i - (count / 2.0f)) * spacing;        // 2.0f로 나누는 이유? -> 가운데 즉 중심 인덱스를 찾기 위해서 가운데를 기준으로 음수 -> 0 -> 양수 
   
 
-        spikes.emplace_back(Pyramid(glm::vec3(pos.x , pos.y + 0.1f, pos.z + offset + spacing / 2.f), glm::vec3(0.2f, 0.4f, 0.2f)));
+        spikes.emplace_back(Pyramid(glm::vec3(pos.x , pos.y + 0.1f, pos.z + offset + spacing / 2.f), glm::vec3(0.2f, 0.25f, 0.2f)));
 
-        Pyramid right(glm::vec3(pos.x + 0.1f, pos.y , pos.z + offset + spacing / 2.f), glm::vec3(0.2f, 0.4f, 0.2f));
+        Pyramid right(glm::vec3(pos.x + 0.1f, pos.y , pos.z + offset + spacing / 2.f), glm::vec3(0.2f, 0.25f, 0.2f));
         right.rotation = glm::vec3(0.0f, 0.0f, -90.0f);
         spikes.emplace_back(right);
 
-        Pyramid bottom(glm::vec3(pos.x , pos.y - 0.1f, pos.z + offset + spacing / 2.f), glm::vec3(0.2f, 0.4f, 0.2f));
+        Pyramid bottom(glm::vec3(pos.x , pos.y - 0.1f, pos.z + offset + spacing / 2.f), glm::vec3(0.2f, 0.25f, 0.2f));
         bottom.rotation = glm::vec3(180.0f, 0.0f, 0.0f);
         spikes.emplace_back(bottom);
 
-        Pyramid left(glm::vec3(pos.x - 0.1f, pos.y , pos.z + offset + spacing / 2.f), glm::vec3(0.2f, 0.4f, 0.2f));
+        Pyramid left(glm::vec3(pos.x - 0.1f, pos.y , pos.z + offset + spacing / 2.f), glm::vec3(0.2f, 0.25f, 0.2f));
         left.rotation = glm::vec3(0.0f, 0.0f, 90.0f);
         spikes.emplace_back(left);
 
@@ -95,17 +95,17 @@ BasicObstacle_Left::BasicObstacle_Left(glm::vec3 pos, float length, float spacin
 		float offset = (i - (count / 2.0f)) * spacing;        // 2.0f로 나누는 이유? -> 가운데 즉 중심 인덱스를 찾기 위해서 가운데를 기준으로 음수 -> 0 -> 양수 
 
 
-		spikes.emplace_back(Pyramid(glm::vec3(pos.x, pos.y + 0.1f, pos.z + offset + spacing / 2.f), glm::vec3(0.2f, 0.4f, 0.2f)));
+		spikes.emplace_back(Pyramid(glm::vec3(pos.x, pos.y + 0.1f, pos.z + offset + spacing / 2.f), glm::vec3(0.2f, 0.25f, 0.2f)));
 
-		Pyramid right(glm::vec3(pos.x + 0.1f, pos.y, pos.z + offset + spacing / 2.f), glm::vec3(0.2f, 0.4f, 0.2f));
+		Pyramid right(glm::vec3(pos.x + 0.1f, pos.y, pos.z + offset + spacing / 2.f), glm::vec3(0.2f, 0.25f, 0.2f));
 		right.rotation = glm::vec3(0.0f, 0.0f, -90.0f);
 		spikes.emplace_back(right);
 
-		Pyramid bottom(glm::vec3(pos.x, pos.y - 0.1f, pos.z + offset + spacing / 2.f), glm::vec3(0.2f, 0.4f, 0.2f));
+		Pyramid bottom(glm::vec3(pos.x, pos.y - 0.1f, pos.z + offset + spacing / 2.f), glm::vec3(0.2f, 0.25f, 0.2f));
 		bottom.rotation = glm::vec3(180.0f, 0.0f, 0.0f);
 		spikes.emplace_back(bottom);
 
-		Pyramid left(glm::vec3(pos.x - 0.1f, pos.y, pos.z + offset + spacing / 2.f), glm::vec3(0.2f, 0.4f, 0.2f));
+		Pyramid left(glm::vec3(pos.x - 0.1f, pos.y, pos.z + offset + spacing / 2.f), glm::vec3(0.2f, 0.25f, 0.2f));
 		left.rotation = glm::vec3(0.0f, 0.0f, 90.0f);
 		spikes.emplace_back(left);
 
