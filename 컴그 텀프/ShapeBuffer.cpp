@@ -132,7 +132,7 @@ void InitPyramidModel()
 
         // 부드러운 초록 그라데이션
         float r = 0.05f + 0.15f * t;  // 0.05 ~ 0.20
-        float g = 0.30f + 0.40f * t;  // 0.30 ~ 0.80 (초록 강조)
+        float g = 0.30f + 0.55f * t;  // 0.30 ~ 0.80 (초록 강조)
         float b = 0.10f + 0.20f * t;  // 0.10 ~ 0.30
 
         pyramidColors[i][0] = r;
