@@ -44,27 +44,22 @@ GLfloat stickColors[8][3];
 void InitStickModel()
 {
     glUseProgram(shaderProgramID);
-    // ±‚∫ª ªˆªÛ
-    for (int i = 0; i < 8; i++)
-    {
-<<<<<<< Updated upstream
-        stickColors[i][0] = 0.75f;
-        stickColors[i][1] = 0.75f;
-        stickColors[i][2] = 0.75f;
-=======
-        float y = stickVertices[i][1];        // -0.5 ~ 0.5
-        float t = (y + 0.5f);                 // 0.0 ~ 1.0 ∑Œ ∫Ø»Ø
+    // Í∏∞Î≥∏ ÏÉâÏÉÅ
+  for (int i = 0; i < 8; i++)
+{
+    float y = stickVertices[i][1];        // -0.5 ~ 0.5
+    float t = (y + 0.5f);                 // 0.0 ~ 1.0 Î°ú Î≥ÄÌôò
 
-        // ∫ŒµÂ∑ØøÓ ∞•ªˆ ±◊∂Ûµ•¿Ãº«
-        float r = 0.40f + 0.35f * t; // 0.40 ~ 0.75
-        float g = 0.25f + 0.20f * t; // 0.25 ~ 0.45
-        float b = 0.10f + 0.10f * t; // 0.10 ~ 0.20
+    // Î∂ÄÎìúÎü¨Ïö¥ Í∞àÏÉâ Í∑∏ÎùºÎç∞Ïù¥ÏÖò
+    float r = 0.40f + 0.35f * t; // 0.40 ~ 0.75
+    float g = 0.25f + 0.20f * t; // 0.25 ~ 0.45
+    float b = 0.10f + 0.10f * t; // 0.10 ~ 0.20
 
-        stickColors[i][0] = r;
-        stickColors[i][1] = g;
-        stickColors[i][2] = b;
->>>>>>> Stashed changes
-    }
+    stickColors[i][0] = r;
+    stickColors[i][1] = g;
+    stickColors[i][2] = b;
+}
+
 
     glGenVertexArrays(1, &vao_stick);
     glBindVertexArray(vao_stick);
@@ -72,19 +67,19 @@ void InitStickModel()
     glGenBuffers(2, vbo_stick);
     glGenBuffers(1, &ebo_stick);
 
-    // ¿ßƒ° πˆ∆€
+    // ÏúÑÏπò Î≤ÑÌçº
     glBindBuffer(GL_ARRAY_BUFFER, vbo_stick[0]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(stickVertices), stickVertices, GL_STATIC_DRAW);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
     glEnableVertexAttribArray(0);
 
-    // ªˆªÛ πˆ∆€
+    // ÏÉâÏÉÅ Î≤ÑÌçº
     glBindBuffer(GL_ARRAY_BUFFER, vbo_stick[1]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(stickColors), stickColors, GL_DYNAMIC_DRAW);
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, 0);
     glEnableVertexAttribArray(1);
 
-    // ¿Œµ¶Ω∫ πˆ∆€
+    // Ïù∏Îç±Ïä§ Î≤ÑÌçº
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo_stick);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(stick_Indices), stick_Indices, GL_STATIC_DRAW);
 }
@@ -132,12 +127,12 @@ void InitPyramidModel()
     glUseProgram(shaderProgramID);
     for (int i = 0; i < 5; i++)
     {
-        float y = pyramidVertices[i][1];      // 0.0 (πŸ¥⁄) ~ 1.0 (≤¿¥Î±‚)
-        float t = y;                           // ±◊¥Î∑Œ 0~1 ªÁøÎ
+        float y = pyramidVertices[i][1];      // 0.0 (Î∞îÎã•) ~ 1.0 (Íº≠ÎåÄÍ∏∞)
+        float t = y;                           // Í∑∏ÎåÄÎ°ú 0~1 ÏÇ¨Ïö©
 
-        // ∫ŒµÂ∑ØøÓ √ ∑œ ±◊∂Ûµ•¿Ãº«
+        // Î∂ÄÎìúÎü¨Ïö¥ Ï¥àÎ°ù Í∑∏ÎùºÎç∞Ïù¥ÏÖò
         float r = 0.05f + 0.15f * t;  // 0.05 ~ 0.20
-        float g = 0.30f + 0.40f * t;  // 0.30 ~ 0.80 (√ ∑œ ∞≠¡∂)
+        float g = 0.30f + 0.40f * t;  // 0.30 ~ 0.80 (Ï¥àÎ°ù Í∞ïÏ°∞)
         float b = 0.10f + 0.20f * t;  // 0.10 ~ 0.30
 
         pyramidColors[i][0] = r;
@@ -151,19 +146,19 @@ void InitPyramidModel()
     glGenBuffers(2, vbo_pyramid);
     glGenBuffers(1, &ebo_pyramid);
 
-    // ¿ßƒ°
+    // ÏúÑÏπò
     glBindBuffer(GL_ARRAY_BUFFER, vbo_pyramid[0]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(pyramidVertices), pyramidVertices, GL_STATIC_DRAW);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
     glEnableVertexAttribArray(0);
 
-    // ªˆªÛ
+    // ÏÉâÏÉÅ
     glBindBuffer(GL_ARRAY_BUFFER, vbo_pyramid[1]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(pyramidColors), pyramidColors, GL_DYNAMIC_DRAW);
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, 0);
     glEnableVertexAttribArray(1);
 
-    // ¿Œµ¶Ω∫ πˆ∆€
+    // Ïù∏Îç±Ïä§ Î≤ÑÌçº
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo_pyramid);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(pyramidIndices), pyramidIndices, GL_STATIC_DRAW);
 }
@@ -183,7 +178,7 @@ void UpdatePyramidColor(float r, float g, float b)
 
 
 // ======================================================
-// Floor (¿≠∏È ≈ÿΩ∫√≥ ¿¸øÎ)
+// Floor (ÏúóÎ©¥ ÌÖçÏä§Ï≤ò Ï†ÑÏö©)
 // ======================================================
 
 // pos(x,y,z), uv(u,v)
