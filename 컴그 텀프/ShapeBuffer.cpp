@@ -44,14 +44,22 @@ GLfloat stickColors[8][3];
 void InitStickModel()
 {
     glUseProgram(shaderProgramID);
-    // ±âº» »ö»ó
-    for (int i = 0; i < 8; i++)
-    {
-        float t = (stickVertices[i][0] + 0.5f); // 0~1
-        stickColors[i][0] = 0.4f * t + 0.2f;
-        stickColors[i][1] = 0.7f;
-        stickColors[i][2] = 1.0f;
-    }
+    // ê¸°ë³¸ ìƒ‰ìƒ
+  for (int i = 0; i < 8; i++)
+{
+    float y = stickVertices[i][1];        // -0.5 ~ 0.5
+    float t = (y + 0.5f);                 // 0.0 ~ 1.0 ë¡œ ë³€í™˜
+
+    // ë¶€ë“œëŸ¬ìš´ ê°ˆìƒ‰ ê·¸ë¼ë°ì´ì…˜
+    float r = 0.40f + 0.35f * t; // 0.40 ~ 0.75
+    float g = 0.25f + 0.20f * t; // 0.25 ~ 0.45
+    float b = 0.10f + 0.10f * t; // 0.10 ~ 0.20
+
+    stickColors[i][0] = r;
+    stickColors[i][1] = g;
+    stickColors[i][2] = b;
+}
+
 
     glGenVertexArrays(1, &vao_stick);
     glBindVertexArray(vao_stick);
@@ -59,19 +67,19 @@ void InitStickModel()
     glGenBuffers(2, vbo_stick);
     glGenBuffers(1, &ebo_stick);
 
-    // À§Ä¡ ¹öÆÛ
+    // ìœ„ì¹˜ ë²„í¼
     glBindBuffer(GL_ARRAY_BUFFER, vbo_stick[0]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(stickVertices), stickVertices, GL_STATIC_DRAW);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
     glEnableVertexAttribArray(0);
 
-    // »ö»ó ¹öÆÛ
+    // ìƒ‰ìƒ ë²„í¼
     glBindBuffer(GL_ARRAY_BUFFER, vbo_stick[1]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(stickColors), stickColors, GL_DYNAMIC_DRAW);
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, 0);
     glEnableVertexAttribArray(1);
 
-    // ÀÎµ¦½º ¹öÆÛ
+    // ì¸ë±ìŠ¤ ë²„í¼
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo_stick);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(stick_Indices), stick_Indices, GL_STATIC_DRAW);
 }
@@ -119,9 +127,17 @@ void InitPyramidModel()
     glUseProgram(shaderProgramID);
     for (int i = 0; i < 5; i++)
     {
-        pyramidColors[i][0] = 0.55f;
-        pyramidColors[i][1] = 0.75f;
-        pyramidColors[i][2] = 0.55f;
+        float y = pyramidVertices[i][1];      // 0.0 (ë°”ë‹¥) ~ 1.0 (ê¼­ëŒ€ê¸°)
+        float t = y;                           // ê·¸ëŒ€ë¡œ 0~1 ì‚¬ìš©
+
+        // ë¶€ë“œëŸ¬ìš´ ì´ˆë¡ ê·¸ë¼ë°ì´ì…˜
+        float r = 0.05f + 0.15f * t;  // 0.05 ~ 0.20
+        float g = 0.30f + 0.40f * t;  // 0.30 ~ 0.80 (ì´ˆë¡ ê°•ì¡°)
+        float b = 0.10f + 0.20f * t;  // 0.10 ~ 0.30
+
+        pyramidColors[i][0] = r;
+        pyramidColors[i][1] = g;
+        pyramidColors[i][2] = b;
     }
 
     glGenVertexArrays(1, &vao_pyramid);
@@ -130,19 +146,19 @@ void InitPyramidModel()
     glGenBuffers(2, vbo_pyramid);
     glGenBuffers(1, &ebo_pyramid);
 
-    // À§Ä¡
+    // ìœ„ì¹˜
     glBindBuffer(GL_ARRAY_BUFFER, vbo_pyramid[0]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(pyramidVertices), pyramidVertices, GL_STATIC_DRAW);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
     glEnableVertexAttribArray(0);
 
-    // »ö»ó
+    // ìƒ‰ìƒ
     glBindBuffer(GL_ARRAY_BUFFER, vbo_pyramid[1]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(pyramidColors), pyramidColors, GL_DYNAMIC_DRAW);
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, 0);
     glEnableVertexAttribArray(1);
 
-    // ÀÎµ¦½º ¹öÆÛ
+    // ì¸ë±ìŠ¤ ë²„í¼
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo_pyramid);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(pyramidIndices), pyramidIndices, GL_STATIC_DRAW);
 }
@@ -162,7 +178,7 @@ void UpdatePyramidColor(float r, float g, float b)
 
 
 // ======================================================
-// Floor (À­¸é ÅØ½ºÃ³ Àü¿ë)
+// Floor (ìœ—ë©´ í…ìŠ¤ì²˜ ì „ìš©)
 // ======================================================
 
 // pos(x,y,z), uv(u,v)
