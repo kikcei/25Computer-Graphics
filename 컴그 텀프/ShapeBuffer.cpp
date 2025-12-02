@@ -47,9 +47,23 @@ void InitStickModel()
     // 기본 색상
     for (int i = 0; i < 8; i++)
     {
+<<<<<<< Updated upstream
         stickColors[i][0] = 0.75f;
         stickColors[i][1] = 0.75f;
         stickColors[i][2] = 0.75f;
+=======
+        float y = stickVertices[i][1];        // -0.5 ~ 0.5
+        float t = (y + 0.5f);                 // 0.0 ~ 1.0 로 변환
+
+        // 부드러운 갈색 그라데이션
+        float r = 0.40f + 0.35f * t; // 0.40 ~ 0.75
+        float g = 0.25f + 0.20f * t; // 0.25 ~ 0.45
+        float b = 0.10f + 0.10f * t; // 0.10 ~ 0.20
+
+        stickColors[i][0] = r;
+        stickColors[i][1] = g;
+        stickColors[i][2] = b;
+>>>>>>> Stashed changes
     }
 
     glGenVertexArrays(1, &vao_stick);
@@ -118,9 +132,17 @@ void InitPyramidModel()
     glUseProgram(shaderProgramID);
     for (int i = 0; i < 5; i++)
     {
-        pyramidColors[i][0] = 0.55f;
-        pyramidColors[i][1] = 0.75f;
-        pyramidColors[i][2] = 0.55f;
+        float y = pyramidVertices[i][1];      // 0.0 (바닥) ~ 1.0 (꼭대기)
+        float t = y;                           // 그대로 0~1 사용
+
+        // 부드러운 초록 그라데이션
+        float r = 0.05f + 0.15f * t;  // 0.05 ~ 0.20
+        float g = 0.30f + 0.40f * t;  // 0.30 ~ 0.80 (초록 강조)
+        float b = 0.10f + 0.20f * t;  // 0.10 ~ 0.30
+
+        pyramidColors[i][0] = r;
+        pyramidColors[i][1] = g;
+        pyramidColors[i][2] = b;
     }
 
     glGenVertexArrays(1, &vao_pyramid);
