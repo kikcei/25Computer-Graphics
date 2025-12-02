@@ -23,6 +23,16 @@ void Floor::Draw(const glm::mat4& view, const glm::mat4& proj)
     GLuint mvpLoc = glGetUniformLocation(shaderProgramID, "mvp");
     glUniformMatrix4fv(mvpLoc, 1, GL_FALSE, &mvp[0][0]);
 
+
+    //  시간 기반 offset 전달: 물 흐르기 효과 핵심
+    float time = glutGet(GLUT_ELAPSED_TIME) * 0.00008f; // 속도 조절
+    float offsetX = -fmod(time, 1.0f);  // 0~1 반복 밒 원하는 방향으로 흐르게하기
+    float offsetY = -fmod(time, 1.0f);
+
+    GLuint uvLoc = glGetUniformLocation(floorShaderID, "uvOffset");
+    glUniform2f(uvLoc, offsetX, offsetY);
+
+
     glActiveTexture(GL_TEXTURE0);
     glBindTexture(GL_TEXTURE_2D, floorTexture);
 
