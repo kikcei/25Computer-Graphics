@@ -47,9 +47,10 @@ void InitStickModel()
     // 기본 색상
     for (int i = 0; i < 8; i++)
     {
-        stickColors[i][0] = 0.75f;
-        stickColors[i][1] = 0.75f;
-        stickColors[i][2] = 0.75f;
+        float t = (stickVertices[i][0] + 0.5f); // 0~1
+        stickColors[i][0] = 0.4f * t + 0.2f;
+        stickColors[i][1] = 0.7f;
+        stickColors[i][2] = 1.0f;
     }
 
     glGenVertexArrays(1, &vao_stick);
