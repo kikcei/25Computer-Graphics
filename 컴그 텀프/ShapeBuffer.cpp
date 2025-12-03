@@ -16,7 +16,7 @@ GLuint ebo_floor;
 
 GLuint vao_skybox;
 GLuint vbo_skybox;
-
+GLuint ebo_skybox;
 // ======================================================
 // Stick Geometry
 // ======================================================
@@ -227,60 +227,40 @@ void InitFloorModel()
 // Skybox (배경 텍스처 전용)
 // ======================================================
 
-float skyboxVertices[] = {
-    //   positions         
-    -1.0f,  1.0f, -1.0f,
-    -1.0f, -1.0f, -1.0f,
-     1.0f, -1.0f, -1.0f,
-     1.0f, -1.0f, -1.0f,
-     1.0f,  1.0f, -1.0f,
-    -1.0f,  1.0f, -1.0f,
+float skyVertices[] =
+{
+    // pos(x,y,z)      uv(u,v)
+    -1.0f,  1.0f, 0.0f,   0.0f, 1.0f,
+    -1.0f, -1.0f, 0.0f,   0.0f, 0.0f,
+     1.0f, -1.0f, 0.0f,   1.0f, 0.0f,
+     1.0f,  1.0f, 0.0f,   1.0f, 1.0f
+};
 
-    -1.0f, -1.0f,  1.0f,
-    -1.0f, -1.0f, -1.0f,
-    -1.0f,  1.0f, -1.0f,
-    -1.0f,  1.0f, -1.0f,
-    -1.0f,  1.0f,  1.0f,
-    -1.0f, -1.0f,  1.0f,
-
-     1.0f, -1.0f, -1.0f,
-     1.0f, -1.0f,  1.0f,
-     1.0f,  1.0f,  1.0f,
-     1.0f,  1.0f,  1.0f,
-     1.0f,  1.0f, -1.0f,
-     1.0f, -1.0f, -1.0f,
-
-    -1.0f, -1.0f,  1.0f,
-    -1.0f,  1.0f,  1.0f,
-     1.0f,  1.0f,  1.0f,
-     1.0f,  1.0f,  1.0f,
-     1.0f, -1.0f,  1.0f,
-    -1.0f, -1.0f,  1.0f,
-
-    -1.0f,  1.0f, -1.0f,
-     1.0f,  1.0f, -1.0f,
-     1.0f,  1.0f,  1.0f,
-     1.0f,  1.0f,  1.0f,
-    -1.0f,  1.0f,  1.0f,
-    -1.0f,  1.0f, -1.0f,
-
-    -1.0f, -1.0f, -1.0f,
-    -1.0f, -1.0f,  1.0f,
-     1.0f, -1.0f, -1.0f,
-     1.0f, -1.0f, -1.0f,
-    -1.0f, -1.0f,  1.0f,
-     1.0f, -1.0f,  1.0f
+unsigned int skyIndices[] =
+{
+    0, 1, 2,
+    2, 3, 0
 };
 
 void InitSkyboxModel()
 {
     glGenVertexArrays(1, &vao_skybox);
     glGenBuffers(1, &vbo_skybox);
+    glGenBuffers(1, &ebo_skybox);
 
     glBindVertexArray(vao_skybox);
-    glBindBuffer(GL_ARRAY_BUFFER, vbo_skybox);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(skyboxVertices), skyboxVertices, GL_STATIC_DRAW);
 
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+    glBindBuffer(GL_ARRAY_BUFFER, vbo_skybox);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(skyVertices), skyVertices, GL_STATIC_DRAW);
+
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo_skybox);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(skyIndices), skyIndices, GL_STATIC_DRAW);
+
+    // pos (location=0)
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)0);
     glEnableVertexAttribArray(0);
+
+    // uv (location=1)
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
+    glEnableVertexAttribArray(1);
 }

@@ -157,7 +157,7 @@
     <ClInclude Include="ShapeBuffer.h" />
     <ClInclude Include="Skybox.h" />
     <ClInclude Include="stb_image.h">
-      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="Stick.h" />
   </ItemGroup>

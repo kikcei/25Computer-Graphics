@@ -17,6 +17,11 @@ GameManager::GameManager()
 void GameManager::LoadStage(int stage)
 {
     // 기존 데이터 모두 초기화
+    skyboxes.emplace_back(
+        glm::vec3(0, 3.0f, -30.0f),   // 위치
+        glm::vec3(60.0f, 40.0f, 1.0f) // 크기(화면보다 크게)
+    );
+
     stageObjects.clear();
     floors.clear();
     rotatingObstacle.clear();
@@ -139,8 +144,13 @@ void GameManager::Update(float dt)
 
 void GameManager::Draw(const glm::mat4& view, const glm::mat4& proj, GLuint mvpLoc)
 {
-   
-   
+    glDepthMask(GL_FALSE);  // 깊이 쓰기 OFF
+
+    for (auto& sky : skyboxes)
+        sky.Draw(view, proj);
+
+    glDepthMask(GL_TRUE);   // 다시 ON
+
     // 바닥 먼저 렌더링
     for (auto& f : floors)
         f.Draw(view, proj);

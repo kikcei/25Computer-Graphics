@@ -28,7 +28,7 @@ struct ObjectData
 class GameManager
 {
 public:
-
+    std::vector<Skybox> skyboxes;
     std::vector<Floor> floors;
     std::vector<PyramidWall> rotatingObstacle;
     std::vector<BasicObstacle_Right> basicRight;

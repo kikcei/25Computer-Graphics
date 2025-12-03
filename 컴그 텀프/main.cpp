@@ -13,18 +13,20 @@
 
 
 // ----- 객체 -----
+#include "Skybox.h"
 #include "Floor.h"
 #include "Stick.h"
 #include "Pyramid.h"
 #include "PyramidWall.h"
 #include "BasicObstacle.h"
 
+
 #pragma comment(lib, "opengl32.lib")
 #pragma comment(lib, "glew32.lib")
 #pragma comment(lib, "freeglut.lib")
 #pragma warning(disable: 4711 4710 4100)
 
-GLuint skyShaderID;
+
 GLuint shaderProgramID;
 BoatSystem boat;
 
@@ -137,7 +139,9 @@ int main(int argc, char** argv)
     shaderProgramID = make_shaderProgram();
     floorShaderID = loadTextureShader("texture_vertex.glsl", "texture_fragment.glsl");
     floorTexture = LoadTexture("water.png");
+
     skyShaderID = loadTextureShader("sky_vertex.glsl", "sky_fragment.glsl");
+    skyTexture = LoadTexture("sky.png");   // sky 텍스처 파일
 
     glUseProgram(shaderProgramID);
     InitStickModel();

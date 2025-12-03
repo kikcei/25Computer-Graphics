@@ -140,6 +140,7 @@ GLuint loadTextureShader(const char* vertexPath, const char* fragmentPath)
 // ----------------------------------------
 GLuint LoadTexture(const char* filePath)
 {
+    stbi_set_flip_vertically_on_load(true);
     int width, height, channels;
     unsigned char* image = stbi_load(filePath, &width, &height, &channels, 4);
 
