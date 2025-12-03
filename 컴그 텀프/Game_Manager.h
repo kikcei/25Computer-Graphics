@@ -14,6 +14,13 @@ struct ObjectData
     glm::vec3 pos;
     float length;         // 스틱의 길이
     float spacing;        // 뿔의 간격
+    glm::vec3 axis = glm::vec3(0, 0, 1); // 회전 장애물 회전축
+    float angle;          // 회전 장애물 회전각도
+    float basicangle = 0.0f;
+    glm::vec3 basicaxis = glm::vec3(0, 0, 0); // 기본 도형 회전
+    float PM_Y = 0.2f;
+    float PM_Z = 0.2f;
+    float PyramidHeight = 0.2f;
 };
 
 class GameManager

@@ -2,10 +2,13 @@
 #include "Pyramid.h"
 #include "ShapeBuffer.h"
                                      // 직사각형 길이 , 가시 간격, 각도
-PyramidWall::PyramidWall(glm::vec3 pos, float length, float spacing, float initialAngle)
-    : body(pos, glm::vec3(length, 0.2f, 0.5f))   // Stick 클래스의 생성자를 호출한다
+PyramidWall::PyramidWall(glm::vec3 pos, float length, float spacing,glm::vec3 basicaxis, glm::vec3 axis, float basicangle, float initialAngle, float stickY, float stickZ, float PyramidHeight)
+    : body(pos, glm::vec3(length, stickY, stickZ))   // Stick 클래스의 생성자를 호출한다
 {
+    basic_Axis = basicaxis;
+    basic_angle = basicangle;
     angle = initialAngle;
+    rotationAxis = axis;
 
     int count = length / spacing; 
 
@@ -13,10 +16,11 @@ PyramidWall::PyramidWall(glm::vec3 pos, float length, float spacing, float initi
     {
         float offset = (i - count / 2.0f) * spacing; 
 
-        spikes.emplace_back(Pyramid(glm::vec3(pos.x + offset + spacing / 2.f, pos.y + 0.1f, pos.z), glm::vec3(0.2f, 0.4f, 0.2f)));
+        spikes.emplace_back(Pyramid(glm::vec3(pos.x + offset + spacing / 2.f, pos.y + 0.1f, pos.z), glm::vec3(0.2f, PyramidHeight, 0.2f)));
 
-        Pyramid bottom(glm::vec3(pos.x + offset + spacing / 2.f, pos.y - 0.1f, pos.z), glm::vec3(0.2f, 0.4f, 0.2f));
+        Pyramid bottom(glm::vec3(pos.x + offset + spacing / 2.f, pos.y - 0.1f, pos.z), glm::vec3(0.2f, PyramidHeight, 0.2f));
         bottom.rotation = glm::vec3(180.0f, 0.0f, 0.0f);
+
         spikes.emplace_back(bottom);
     }
 }
@@ -28,6 +32,7 @@ void PyramidWall::Draw(const glm::mat4& view, const glm::mat4& proj, GLuint mvpL
 
     // 벽의 중심을 기준으로 회전
     model = glm::translate(model, body.pos);              // 1) 중심으로 이동
+    model = glm::rotate(model, glm::radians(basic_angle), basic_Axis); // 기본 도형 회전
     model = glm::rotate(model, glm::radians(angle), rotationAxis); // 2) 회전
     model = glm::translate(model, -body.pos);             // 3) 다시 원래자리로 이동
 
@@ -66,5 +71,5 @@ void PyramidWall::Draw(const glm::mat4& view, const glm::mat4& proj, GLuint mvpL
 
 void PyramidWall::Update(float dt)
 {
-    angle += 60.0f * dt;   // 초당 60도 회전
+    angle += 35.0f * dt;   // 초당 60도 회전
 }

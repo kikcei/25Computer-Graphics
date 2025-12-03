@@ -20,6 +20,7 @@
 GLuint shaderProgramID;
 
 float lastTime = 0.0f;
+float cameraZ = 3.0f;
 
 //------------------------------
 GameManager gamemanager;
@@ -33,7 +34,7 @@ void drawScene()
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 
-	glm::mat4 view = glm::lookAt(glm::vec3(0, 1.5f, 3), glm::vec3(0, 0, 0), glm::vec3(0, 1, 0));
+	glm::mat4 view = glm::lookAt(glm::vec3(0, 1.5f, cameraZ), glm::vec3(0, 0, cameraZ-3.0f), glm::vec3(0, 1, 0));
     glm::mat4 proj = glm::perspective(glm::radians(60.0f),1280.0f / 960.0f,0.1f,100.0f);
     GLuint mvpLoc = glGetUniformLocation(shaderProgramID, "mvp");
 
@@ -58,6 +59,12 @@ void keyboard(unsigned char key, int x, int y)
 {
 	switch (key)
 	{
+    case 'a':
+        cameraZ -= 0.8f;;
+        break;
+    case 's':
+        cameraZ += 0.8f;;
+        break;
 	case 'q':
 		exit(0);
 		break;
