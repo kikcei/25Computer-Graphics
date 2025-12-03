@@ -36,3 +36,13 @@ extern GLuint vbo_floor;
 extern GLuint ebo_floor;
 
 void InitFloorModel();
+
+// ==============================
+// Skybox (¹è°æ ¸ðµ¨)
+// ==============================
+
+extern GLuint vao_skybox;
+extern GLuint vbo_skybox;
+extern GLuint ebo_skybox;
+
+void InitSkyboxModel();

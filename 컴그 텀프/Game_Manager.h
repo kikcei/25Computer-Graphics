@@ -5,6 +5,7 @@
 #include "PyramidWall.h"
 #include "BasicObstacle.h"
 #include "Floor.h"
+#include "Skybox.h"
 
 enum ObjType { FLOOR = 0, ROTATE = 1, MOVE_LEFT = 2, MOVE_RIGHT = 3 };
 
@@ -27,6 +28,7 @@ struct ObjectData
 class GameManager
 {
 public:
+
     std::vector<Floor> floors;
     std::vector<PyramidWall> rotatingObstacle;
     std::vector<BasicObstacle_Right> basicRight;

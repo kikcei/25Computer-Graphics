@@ -24,6 +24,7 @@
 #pragma comment(lib, "freeglut.lib")
 #pragma warning(disable: 4711 4710 4100)
 
+GLuint skyShaderID;
 GLuint shaderProgramID;
 BoatSystem boat;
 
@@ -45,14 +46,14 @@ void drawScene()
     // 1) 카메라: 메인에서 한 번만 계산
     glm::mat4 view = glm::lookAt(
         glm::vec3(0, 1.5, cameraZ +3),       // eye
-        glm::vec3(0, 0, cameraZ),          // center
+        glm::vec3(0, 1.5, cameraZ),          // center
         glm::vec3(0, 1, 0));               // up
 
     glm::mat4 proj = glm::perspective(
         glm::radians(60.0f),
         1280.0f / 960.0f,
         0.1f,
-        100.0f);
+        1000.0f);
 //-----------------------------------------------------------------------------------------
 
 
@@ -136,11 +137,13 @@ int main(int argc, char** argv)
     shaderProgramID = make_shaderProgram();
     floorShaderID = loadTextureShader("texture_vertex.glsl", "texture_fragment.glsl");
     floorTexture = LoadTexture("water.png");
-    
+    skyShaderID = loadTextureShader("sky_vertex.glsl", "sky_fragment.glsl");
+
     glUseProgram(shaderProgramID);
     InitStickModel();
     InitPyramidModel();
     InitFloorModel();
+    InitSkyboxModel();
 
     gamemanager.LoadStage(1);
 

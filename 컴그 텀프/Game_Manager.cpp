@@ -1,7 +1,7 @@
 #include "Game_Manager.h"
 #include "ShapeBuffer.h"
 
-GameManager::GameManager()
+GameManager::GameManager() 
 {
    
 }
@@ -139,6 +139,8 @@ void GameManager::Update(float dt)
 
 void GameManager::Draw(const glm::mat4& view, const glm::mat4& proj, GLuint mvpLoc)
 {
+   
+   
     // ¹Ù´Ú ¸ÕÀú ·»´õ¸µ
     for (auto& f : floors)
         f.Draw(view, proj);

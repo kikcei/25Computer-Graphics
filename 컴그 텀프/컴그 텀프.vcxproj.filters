@@ -14,20 +14,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="vertex.glsl">
-      <Filter>헤더 파일</Filter>
-    </None>
-    <None Include="fragment.glsl">
-      <Filter>헤더 파일</Filter>
-    </None>
-    <None Include="texture_fragment.glsl">
-      <Filter>헤더 파일</Filter>
-    </None>
-    <None Include="texture_vertex.glsl">
-      <Filter>헤더 파일</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="BasicObstacle.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
@@ -71,6 +57,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="BoatSystem.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Skybox.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
@@ -120,5 +109,34 @@
     <ClInclude Include="BoatSystem.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Skybox.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="fragment_boat.glsl">
+      <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="sky_fragment.glsl">
+      <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="sky_vertex.glsl">
+      <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="vertex_boat.glsl">
+      <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="fragment.glsl">
+      <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="texture_fragment.glsl">
+      <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="texture_vertex.glsl">
+      <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="vertex.glsl">
+      <Filter>리소스 파일</Filter>
+    </None>
   </ItemGroup>
 </Project>

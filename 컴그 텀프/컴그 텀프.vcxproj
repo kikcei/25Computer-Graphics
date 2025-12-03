@@ -124,12 +124,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <None Include="fragment.glsl" />
-    <None Include="texture_fragment.glsl" />
-    <None Include="texture_vertex.glsl" />
-    <None Include="vertex.glsl" />
-  </ItemGroup>
-  <ItemGroup>
     <ClCompile Include="BasicObstacle.cpp" />
     <ClCompile Include="boat.cpp" />
     <ClCompile Include="BoatSystem.cpp" />
@@ -144,6 +138,7 @@
     <ClCompile Include="PyramidWall.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="ShapeBuffer.cpp" />
+    <ClCompile Include="Skybox.cpp" />
     <ClCompile Include="Stick.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -160,8 +155,21 @@
     <ClInclude Include="PyramidWall.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="ShapeBuffer.h" />
-    <ClInclude Include="stb_image.h" />
+    <ClInclude Include="Skybox.h" />
+    <ClInclude Include="stb_image.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClInclude>
     <ClInclude Include="Stick.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="fragment.glsl" />
+    <None Include="fragment_boat.glsl" />
+    <None Include="sky_fragment.glsl" />
+    <None Include="sky_vertex.glsl" />
+    <None Include="texture_fragment.glsl" />
+    <None Include="texture_vertex.glsl" />
+    <None Include="vertex.glsl" />
+    <None Include="vertex_boat.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

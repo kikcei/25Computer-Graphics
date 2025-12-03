@@ -6,7 +6,7 @@ layout(location = 1) in vec2 aUV;
 out vec2 uv;
 
 uniform mat4 mvp;
-uniform vec2 uvOffset;   // 애니메이션
+uniform vec2 uvOffset;   
 
 void main()
 {
