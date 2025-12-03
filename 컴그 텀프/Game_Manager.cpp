@@ -92,11 +92,11 @@ void GameManager::LoadStage(int stage)
          {0,0,1}         // basicaxis
         },
 
-         { ROTATE,{-3,0.1,-31}, 9.0f, 1.0f, {0,0,1}, 0.0f,90.0f,{1,0,0},0.3,0.3 , 0.6f},
-         { ROTATE,{-3,0.1,-31}, 9.0f, 1.0f, {0,0,1}, 90.0f,90.0f,{1,0,0},0.3,0.3, 0.6f},
+         { ROTATE,{-3,0.1,-31}, 9.0f, 1.0f, {0,0,1}, 0.0f,90.0f,{1,0,0},0.3,0.3 , 0.6f ,-1},
+         { ROTATE,{-3,0.1,-31}, 9.0f, 1.0f, {0,0,1}, 90.0f,90.0f,{1,0,0},0.3,0.3, 0.6f ,-1},
 
-         { ROTATE,{3,0.1,-24}, 9.0f, 1.0f, {0,0,1}, 0.0f,90.0f,{1,0,0},0.3,0.3 , 0.6f},
-         { ROTATE,{3,0.1,-24}, 9.0f, 1.0f, {0,0,1}, 90.0f,90.0f,{1,0,0},0.3,0.3, 0.6f}
+         { ROTATE,{3,0.1,-24}, 9.0f, 1.0f, {0,0,1}, 0.0f,90.0f,{1,0,0},0.3,0.3 , 0.6f,1},
+         { ROTATE,{3,0.1,-24}, 9.0f, 1.0f, {0,0,1}, 90.0f,90.0f,{1,0,0},0.3,0.3, 0.6f,1}
 
 
         };
@@ -110,7 +110,7 @@ void GameManager::LoadStage(int stage)
             break;
 
         case 1: // ROTATE
-            rotatingObstacle.emplace_back(o.pos, o.length, o.spacing, o.basicaxis, o.axis, o.basicangle, o.angle, o.PM_Y, o.PM_Z, o.PyramidHeight);
+            rotatingObstacle.emplace_back(o.pos, o.length, o.spacing, o.basicaxis, o.axis, o.basicangle, o.angle, o.PM_Y, o.PM_Z, o.PyramidHeight, o.rotateDir);
             break;
 
         case 2: // LEFT MOVE

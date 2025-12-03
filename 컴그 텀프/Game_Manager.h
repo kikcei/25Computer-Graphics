@@ -21,6 +21,7 @@ struct ObjectData
     float PM_Y = 0.2f;
     float PM_Z = 0.2f;
     float PyramidHeight = 0.2f;
+    int rotateDir = 1;
 };
 
 class GameManager

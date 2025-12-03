@@ -2,13 +2,14 @@
 #include "Pyramid.h"
 #include "ShapeBuffer.h"
                                      // 직사각형 길이 , 가시 간격, 각도
-PyramidWall::PyramidWall(glm::vec3 pos, float length, float spacing,glm::vec3 basicaxis, glm::vec3 axis, float basicangle, float initialAngle, float stickY, float stickZ, float PyramidHeight)
+PyramidWall::PyramidWall(glm::vec3 pos, float length, float spacing,glm::vec3 basicaxis, glm::vec3 axis, float basicangle, float initialAngle, float stickY, float stickZ, float PyramidHeight, int rotateDir )
     : body(pos, glm::vec3(length, stickY, stickZ))   // Stick 클래스의 생성자를 호출한다
 {
     basic_Axis = basicaxis;
     basic_angle = basicangle;
     angle = initialAngle;
     rotationAxis = axis;
+    rotatedirection = rotateDir;
 
     int count = length / spacing; 
 
@@ -71,5 +72,5 @@ void PyramidWall::Draw(const glm::mat4& view, const glm::mat4& proj, GLuint mvpL
 
 void PyramidWall::Update(float dt)
 {
-    angle += 35.0f * dt;   // 초당 60도 회전
+    angle += rotatedirection * 35.0f * dt;   // 초당 60도 회전
 }
