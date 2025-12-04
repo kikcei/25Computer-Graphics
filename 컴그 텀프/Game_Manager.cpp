@@ -35,6 +35,15 @@ void GameManager::LoadStage(int stage)
     rotatingObstacle.clear();
     basicRight.clear();
     basicLeft.clear();
+    movewall.clear();
+
+    movewall.emplace_back(
+        glm::vec3(1, 2, -20),     // 벽 위치
+        glm::vec3(1.2, 1.2, 0.4f),    // 벽 크기
+        0.20f,                    // 스파이크 크기
+        0.2f,                     // 간격
+        0.0f                     // 회전
+    );
 
     if (stage == 1)
     {
@@ -224,6 +233,8 @@ void GameManager::LoadStage(int stage)
         case 3: // RIGHT MOVE
             basicRight.emplace_back(o.pos, o.length, o.spacing, o.basicaxis, o.axis, o.basicangle, o.angle);
             break;
+
+
         }
     }
     // stage 2, 3 ... 추가 가능
@@ -265,4 +276,8 @@ void GameManager::Draw(const glm::mat4& view, const glm::mat4& proj, GLuint mvpL
     // 기본 장애물(왼쪽)
     for (auto& w : basicLeft)
         w.Draw_Left(view, proj, mvpLoc);
+
+    // 움직이는 벽 장애물
+    for (auto& w : movewall)
+        w.Draw(view, proj, mvpLoc);
 }

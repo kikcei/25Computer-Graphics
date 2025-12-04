@@ -40,9 +40,43 @@ void InitFloorModel();
 // ==============================
 // Skybox (배경 모델)
 // ==============================
-
 extern GLuint vao_skybox;
 extern GLuint vbo_skybox;
 extern GLuint ebo_skybox;
 
 void InitSkyboxModel();
+
+// ==============================
+// MoveWall (움직이는 벽 모델)
+// ==============================
+extern GLuint vao_movewall;
+extern GLuint vbo_movewall[2];
+extern GLuint ebo_movewallk;
+
+void InitMoveWallModel();
+void UpdateMoveWallColor(float r, float g, float b);
+
+//------------------------------------------------------------------------------
+// 
+// MoveWall 관련
+extern GLfloat movewallVertices[8][3];
+extern GLuint  movewall_Indices[36];
+extern GLfloat movewallColors[8][3];
+
+// Stick 관련
+extern GLfloat stickVertices[8][3];
+extern GLuint  stick_Indices[36];
+extern GLfloat stickColors[8][3];
+
+// Pyramid 관련
+extern GLfloat pyramidVertices[5][3];
+extern GLuint  pyramidIndices[18];
+extern GLfloat pyramidColors[5][3];
+
+// Skybox 관련 (원하면)
+extern float skyVertices[/* 정확한 크기 */];
+extern unsigned int skyIndices[/* 정확한 크기 */];
+
+// Floor 관련
+extern GLfloat floorVertices[20];
+extern GLuint  floorIndices[6];

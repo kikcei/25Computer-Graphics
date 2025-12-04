@@ -17,6 +17,11 @@ GLuint ebo_floor;
 GLuint vao_skybox;
 GLuint vbo_skybox;
 GLuint ebo_skybox;
+
+GLuint vao_movewall;
+GLuint vbo_movewall[2];
+GLuint ebo_movewall;
+
 // ======================================================
 // Stick Geometry
 // ======================================================
@@ -170,15 +175,23 @@ void UpdatePyramidColor(float r, float g, float b)
 {
     for (int i = 0; i < 5; i++)
     {
-        pyramidColors[i][0] = r;
-        pyramidColors[i][1] = g;
-        pyramidColors[i][2] = b;
+        float y = pyramidVertices[i][1]; // 0.0 ~ 1.0
+        float t = y;
+
+        // InitPyramidModel()과 동일한 초록 그라데이션 계산
+        float baseR = 0.05f + 0.15f * t;
+        float baseG = 0.30f + 0.55f * t;
+        float baseB = 0.10f + 0.20f * t;
+
+        // 그대로 복구하거나, 추가적으로 색조 조절도 가능
+        pyramidColors[i][0] = baseR * r;
+        pyramidColors[i][1] = baseG * g;
+        pyramidColors[i][2] = baseB * b;
     }
 
     glBindBuffer(GL_ARRAY_BUFFER, vbo_pyramid[1]);
     glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(pyramidColors), pyramidColors);
 }
-
 
 // ======================================================
 // Floor (윗면 텍스처 전용)
@@ -303,4 +316,95 @@ void InitSkyboxModel()
     // uv (location 1)
     glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(float), (void*)(3 * sizeof(float)));
     glEnableVertexAttribArray(1);
+}
+
+// ======================================================
+// MoveWall (움직이는 벽 전용)
+// ======================================================
+
+GLfloat movewallVertices[8][3] =
+{
+    {-0.5f, -0.5f, -0.5f},
+    { 0.5f, -0.5f, -0.5f},
+    { 0.5f,  0.5f, -0.5f},
+    {-0.5f,  0.5f, -0.5f},
+    {-0.5f, -0.5f,  0.5f},
+    { 0.5f, -0.5f,  0.5f},
+    { 0.5f,  0.5f,  0.5f},
+    {-0.5f,  0.5f,  0.5f}
+};
+
+GLuint movewall_Indices[] =
+{
+    0,1,2, 2,3,0,
+    4,5,6, 6,7,4,
+    0,4,7, 7,3,0,
+    1,5,6, 6,2,1,
+    3,2,6, 6,7,3,
+    0,1,5, 5,4,0
+};
+
+GLfloat movewallColors[8][3];
+
+void InitMoveWallModel()
+{
+    glUseProgram(shaderProgramID);
+    // 기본 색상
+    for (int i = 0; i < 8; i++)
+    {
+        float y = movewallVertices[i][1];     // <- 올바른 버텍스 사용
+        float t = (y + 0.5f);                 // 0 ~ 1
+
+        float base = 0.25f + 0.25f * t;
+        float highlight = 0.50f + 0.40f * t;
+        float shadow = 0.15f * (1.0f - t);
+
+        float r = base * 0.8f + highlight * 0.2f - shadow * 0.1f;
+        float g = base * 0.85f + highlight * 0.15f;
+        float b = base * 0.90f + highlight * 0.3f;
+
+        r = glm::clamp(r, 0.0f, 1.0f);
+        g = glm::clamp(g, 0.0f, 1.0f);
+        b = glm::clamp(b, 0.0f, 1.0f);
+
+        movewallColors[i][0] = r;   // <- 올바른 색상 배열에 저장
+        movewallColors[i][1] = g;
+        movewallColors[i][2] = b;
+    }
+
+
+    glGenVertexArrays(1, &vao_movewall);
+    glBindVertexArray(vao_movewall);
+
+    glGenBuffers(2, vbo_movewall);
+    glGenBuffers(1, &ebo_movewall);
+
+    // 위치 버퍼
+    glBindBuffer(GL_ARRAY_BUFFER, vbo_movewall[0]);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(movewallVertices), movewallVertices, GL_STATIC_DRAW);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
+    glEnableVertexAttribArray(0);
+
+    // 색상 버퍼
+    glBindBuffer(GL_ARRAY_BUFFER, vbo_movewall[1]);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(movewallColors), movewallColors, GL_DYNAMIC_DRAW);
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, 0);
+    glEnableVertexAttribArray(1);
+
+    // 인덱스 버퍼
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo_movewall);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(movewall_Indices), movewall_Indices, GL_STATIC_DRAW);
+}
+
+void UpdateMoveWallColor(float r, float g, float b)
+{
+    for (int i = 0; i < 8; i++)
+    {
+         movewallColors[i][0] = r;
+         movewallColors[i][1] = g;
+         movewallColors[i][2] = b;
+    }
+
+    glBindBuffer(GL_ARRAY_BUFFER, vbo_movewall[1]);
+    glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(movewallColors), movewallColors);
 }

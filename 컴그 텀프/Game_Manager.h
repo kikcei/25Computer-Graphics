@@ -6,8 +6,10 @@
 #include "BasicObstacle.h"
 #include "Floor.h"
 #include "Skybox.h"
+#include "MoveWall.h"
 
-enum ObjType { FLOOR = 0, ROTATE = 1, MOVE_LEFT = 2, MOVE_RIGHT = 3 };
+
+enum ObjType { FLOOR = 0, ROTATE = 1, MOVE_LEFT = 2, MOVE_RIGHT = 3,  MOVE_WALL = 4 };
 
 struct ObjectData
 {
@@ -30,10 +32,12 @@ class GameManager
 public:
     std::vector<Skybox> skyboxes;
     std::vector<Floor> floors;
+   
     std::vector<PyramidWall> rotatingObstacle;
     std::vector<BasicObstacle_Right> basicRight;
     std::vector<BasicObstacle_Left> basicLeft;
-
+    std::vector<MoveWall> movewall;
+   
     std::vector<ObjectData> stageObjects;
 
     GameManager();
