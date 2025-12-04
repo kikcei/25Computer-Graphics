@@ -6,13 +6,21 @@ GameManager::GameManager()
    
 }
 
-// glm::vec3 pos;
-// float length;         // 스틱의 길이
-// float spacing;        // 뿔의 간격
-// glm::vec3 axis = glm::vec3(0, 0, 1); // 회전 장애물 회전축
-// float angle;          // 회전 장애물 회전각도
-// float basicangle = 0.0f; // 기본 장애물 회전
-// glm::vec3 basicaxis = glm::vec3(0, 0, 0); // 기본 도형 회전
+//glm::vec3 pos;
+//float length;         // 스틱의 길이
+//float spacing;        // 뿔의 간격
+//float angle;          // 회전 장애물 회전각도
+//float basicangle = 0.0f;
+//glm::vec3 axis = glm::vec3(0, 0, 1); // 회전 장애물 회전축
+//glm::vec3 basicaxis = glm::vec3(0, 0, 0); // 기본 도형 회전
+//float PM_STICK_Y = 0.2f;
+//float PM_STICK_Z = 0.2f;
+//float PyramidHeight = 0.2f;
+//int rotateDir = 1;
+
+auto rnd = [](float min, float max) {
+    return min + static_cast<float>(rand()) / RAND_MAX * (max - min);
+};
 
 void GameManager::LoadStage(int stage)
 {
@@ -51,8 +59,6 @@ void GameManager::LoadStage(int stage)
         { FLOOR, { 5,0,-35}, 5.0f, 5.0f },
         { FLOOR, {-5,0,-35}, 5.0f, 5.0f },
 
-
-       
         { FLOOR, { 0,0,-40}, 5.0f, 5.0f },
         { FLOOR, { 0,0,-45}, 5.0f, 5.0f },
         { FLOOR, { 0,0,-50}, 5.0f, 5.0f },
@@ -60,30 +66,108 @@ void GameManager::LoadStage(int stage)
         { FLOOR, { 0,0,-60}, 5.0f, 5.0f },
         { FLOOR, { 0,0,-65}, 5.0f, 5.0f },
         { FLOOR, { 0,0,-70}, 5.0f, 5.0f },
+
+         { FLOOR, { 5,0,-60}, 5.0f, 5.0f },
+        { FLOOR, { 10,0,-60}, 5.0f, 5.0f },
+        { FLOOR, { 15,0,-60}, 5.0f, 5.0f },
+        { FLOOR, { 20,0,-60}, 5.0f, 5.0f },
+        { FLOOR, { 25,0,-60}, 5.0f, 5.0f },
+        { FLOOR, { 5,0,-65}, 5.0f, 5.0f },
+        { FLOOR, { 10,0,-65}, 5.0f, 5.0f },
+        { FLOOR, { 15,0,-65}, 5.0f, 5.0f },
+        { FLOOR, { 20,0,-65}, 5.0f, 5.0f },
+        { FLOOR, { 25,0,-65}, 5.0f, 5.0f },
+        { FLOOR, { 5,0, -70}, 5.0f, 5.0f },
+        { FLOOR, { 10,0,-70}, 5.0f, 5.0f },
+        { FLOOR, { 15,0,-70}, 5.0f, 5.0f },
+        { FLOOR, { 20,0,-70}, 5.0f, 5.0f },
+        { FLOOR, { 25,0,-70}, 5.0f, 5.0f },
+
+
+        { FLOOR, { 25,0,-70}, 5.0f, 5.0f },
+        { FLOOR, { 25,0,-75}, 5.0f, 5.0f },
+        { FLOOR, { 25,0,-80}, 5.0f, 5.0f },
+        { FLOOR, { 25,0,-85}, 5.0f, 5.0f },
+        { FLOOR, { 25,0,-90}, 5.0f, 5.0f },
+
 //-------------------------------------------------------------------------------
-        { MOVE_RIGHT, { 2.2,0.1,0 },  3.0f, 0.5f },  // right move
-        { MOVE_LEFT,  {-2.2,0.1,0 },  3.0f, 0.5f },  // left move
+        { MOVE_RIGHT, {  2.2f, 0.1f,   0.0f }, 3.0f, 0.5f, 0.0f, 0.0f, {0,0,1}, {0,0,1} },
+        { MOVE_LEFT,  { -2.2f, 0.1f,   0.0f }, 3.0f, 0.5f, 0.0f, 0.0f, {0,0,1}, {0,0,1} },
+        { MOVE_LEFT,  {  2.2f, 0.1f,  -3.0f }, 3.0f, 0.5f, 0.0f, 0.0f, {0,0,1}, {0,0,1} },
+        { MOVE_RIGHT, { -2.2f, 0.1f,  -3.0f }, 3.0f, 0.5f, 0.0f, 0.0f, {0,0,1}, {0,0,1} },
+        { MOVE_RIGHT, {  2.2f, 0.1f,  -6.0f }, 3.0f, 0.5f, 0.0f, 0.0f, {0,0,1}, {0,0,1} },
+        { MOVE_LEFT,  { -2.2f, 0.1f,  -6.0f }, 3.0f, 0.5f, 0.0f, 0.0f, {0,0,1}, {0,0,1} },
+        { MOVE_RIGHT, {  2.2f, 0.1f, -15.0f }, 3.0f, 0.5f, 0.0f, 0.0f, {0,0,1}, {0,0,1} },
+        { MOVE_LEFT,  { -2.2f, 0.1f, -15.0f }, 3.0f, 0.5f, 0.0f, 0.0f, {0,0,1}, {0,0,1} },
+        { MOVE_LEFT,  {  2.2f, 0.1f, -18.0f }, 3.0f, 0.5f, 0.0f, 0.0f, {0,0,1}, {0,0,1} },
+        { MOVE_RIGHT, { -2.2f, 0.1f, -18.0f }, 3.0f, 0.5f, 0.0f, 0.0f, {0,0,1}, {0,0,1} },
+ 
+        { MOVE_RIGHT, {  2.2f, 0.1f, -39.0f }, 3.0f, 0.5f, 0.0f, 0.0f, {0,0,1}, {0,0,1} },
+        { MOVE_LEFT,  { -2.2f, 0.1f, -39.0f }, 3.0f, 0.5f, 0.0f, 0.0f, {0,0,1}, {0,0,1} },
+        { MOVE_RIGHT, {  2.2f, 0.1f, -42.0f }, 3.0f, 0.5f, 0.0f, 0.0f, {0,0,1}, {0,0,1} },
+        { MOVE_LEFT,  { -2.2f, 0.1f, -42.0f }, 3.0f, 0.5f, 0.0f, 0.0f, {0,0,1}, {0,0,1} },
+        { MOVE_LEFT,  {  2.2f, 0.1f, -45.0f }, 3.0f, 0.5f, 0.0f, 0.0f, {0,0,1}, {0,0,1} },
+        { MOVE_RIGHT, { -2.2f, 0.1f, -45.0f }, 3.0f, 0.5f, 0.0f, 0.0f, {0,0,1}, {0,0,1} },
+        { MOVE_LEFT,  {  2.2f, 0.1f, -48.0f }, 3.0f, 0.5f, 0.0f, 0.0f, {0,0,1}, {0,0,1} },
+        { MOVE_RIGHT, { -2.2f, 0.1f, -48.0f }, 3.0f, 0.5f, 0.0f, 0.0f, {0,0,1}, {0,0,1} },
+        { MOVE_RIGHT, {  2.2f, 0.1f, -51.0f }, 3.0f, 0.5f, 0.0f, 0.0f, {0,0,1}, {0,0,1} },
+        { MOVE_LEFT,  { -2.2f, 0.1f, -51.0f }, 3.0f, 0.5f, 0.0f, 0.0f, {0,0,1}, {0,0,1} },
+        { MOVE_RIGHT, {  2.2f, 0.1f, -54.0f }, 3.0f, 0.5f, 0.0f, 0.0f, {0,0,1}, {0,0,1} },
+        { MOVE_LEFT,  { -2.2f, 0.1f, -54.0f }, 3.0f, 0.5f, 0.0f, 0.0f, {0,0,1}, {0,0,1} },
+        { MOVE_LEFT,  {  2.2f, 0.1f, -57.0f }, 3.0f, 0.5f, 0.0f, 0.0f, {0,0,1}, {0,0,1} },
+        { MOVE_RIGHT, { -2.2f, 0.1f, -57.0f }, 3.0f, 0.5f, 0.0f, 0.0f, {0,0,1}, {0,0,1} },
+        { MOVE_LEFT,  {  2.2f, 0.1f, -60.0f }, 3.0f, 0.5f, 0.0f, 0.0f, {0,0,1}, {0,0,1} },
+        { MOVE_RIGHT, { -2.2f, 0.1f, -60.0f }, 3.0f, 0.5f, 0.0f, 0.0f, {0,0,1}, {0,0,1} },
+        { MOVE_LEFT,  { -2.2f, 0.1f, -63.0f }, 3.0f, 0.5f, 0.0f, 0.0f, {0,0,1}, {0,0,1} },
+        { MOVE_LEFT,  { -2.2f, 0.1f, -66.0f }, 3.0f, 0.5f, 0.0f, 0.0f, {0,0,1}, {0,0,1} },
+        { MOVE_RIGHT, { -2.2f, 0.1f, -69.0f }, 3.0f, 0.5f, 0.0f, 0.0f, {0,0,1}, {0,0,1} },
+        { MOVE_RIGHT, { -2.2f, 0.1f, -72.0f }, 3.0f, 0.5f, 0.0f, 0.0f, {0,0,1}, {0,0,1} },
+       
+        
+        { MOVE_RIGHT, { -0.6f, 0.1f, -72.0f }, 3.0f, 0.5f, 0.0f, 90.0f,{0,0,1}, {0,1,0} },
+        { MOVE_LEFT,  {  2.4f, 0.1f, -72.0f }, 3.0f, 0.5f, 0.0f, 90.0f,{0,0,1}, {0,1,0} },
+        { MOVE_RIGHT, {  5.4f, 0.1f, -72.0f }, 3.0f, 0.5f, 0.0f, 90.0f,{0,0,1}, {0,1,0} },
+        { MOVE_LEFT,  {  8.4f, 0.1f, -72.0f }, 3.0f, 0.5f, 0.0f, 90.0f,{0,0,1}, {0,1,0} },
+        { MOVE_RIGHT, {  11.4f, 0.1f, -72.0f }, 3.0f, 0.5f, 0.0f, 90.0f,{0,0,1}, {0,1,0} },
+        { MOVE_LEFT,  {  14.4f, 0.1f, -72.0f }, 3.0f, 0.5f, 0.0f, 90.0f,{0,0,1}, {0,1,0} },
+        { MOVE_RIGHT, {  17.4f, 0.1f, -72.0f }, 3.0f, 0.5f, 0.0f, 90.0f,{0,0,1}, {0,1,0} },
+        { MOVE_LEFT,  {  20.4f, 0.1f, -72.0f }, 3.0f, 0.5f, 0.0f, 90.0f,{0,0,1}, {0,1,0} },
+        
+        // 장애물
+        { MOVE_RIGHT, { rnd(-1.0f,22.0f), -0.12f, rnd(-70.0f, -63.0f) }, 3.0f, 0.5f, 0.0f, 90.0f,{0,0,1}, {1,0,0} },
+        { MOVE_RIGHT, { rnd(-1.0f,22.0f), -0.12f, rnd(-70.0f, -63.0f) }, 3.0f, 0.5f, 0.0f, 90.0f,{0,0,1}, {1,0,0} },
+        { MOVE_RIGHT, { rnd(-1.0f,22.0f), -0.12f, rnd(-70.0f, -63.0f) }, 3.0f, 0.5f, 0.0f, 90.0f,{0,0,1}, {1,0,0} },
+        { MOVE_RIGHT, { rnd(-1.0f,22.0f), -0.12f, rnd(-70.0f, -63.0f) }, 3.0f, 0.5f, 0.0f, 90.0f,{0,0,1}, {1,0,0} },
+        { MOVE_RIGHT, { rnd(-1.0f,22.0f), -0.12f, rnd(-70.0f, -63.0f) }, 3.0f, 0.5f, 0.0f, 90.0f,{0,0,1}, {1,0,0} },
+        { MOVE_RIGHT, { rnd(-1.0f,22.0f), -0.12f, rnd(-70.0f, -63.0f) }, 3.0f, 0.5f, 0.0f, 90.0f,{0,0,1}, {1,0,0} },
+        { MOVE_RIGHT, { rnd(-1.0f,22.0f), -0.12f, rnd(-70.0f, -63.0f) }, 3.0f, 0.5f, 0.0f, 90.0f,{0,0,1}, {1,0,0} },
+        { MOVE_RIGHT, { rnd(-1.0f,22.0f), -0.12f, rnd(-70.0f, -63.0f) }, 3.0f, 0.5f, 0.0f, 90.0f,{0,0,1}, {1,0,0} },
+        { MOVE_RIGHT, { rnd(-1.0f,22.0f), -0.12f, rnd(-70.0f, -63.0f) }, 3.0f, 0.5f, 0.0f, 90.0f,{0,0,1}, {1,0,0} },
+        { MOVE_RIGHT, { rnd(-1.0f,22.0f), -0.12f, rnd(-70.0f, -63.0f) }, 3.0f, 0.5f, 0.0f, 90.0f,{0,0,1}, {1,0,0} },
+        { MOVE_RIGHT, { rnd(-1.0f,22.0f), -0.12f, rnd(-70.0f, -63.0f) }, 3.0f, 0.5f, 0.0f, 90.0f,{0,0,1}, {1,0,0} },
+        { MOVE_RIGHT, { rnd(-1.0f,22.0f), -0.12f, rnd(-70.0f, -63.0f) }, 3.0f, 0.5f, 0.0f, 90.0f,{0,0,1}, {1,0,0} },
+        { MOVE_RIGHT, { rnd(-1.0f,22.0f), -0.12f, rnd(-70.0f, -63.0f) }, 3.0f, 0.5f, 0.0f, 90.0f,{0,0,1}, {1,0,0} },
+        { MOVE_RIGHT, { rnd(-1.0f,22.0f), -0.12f, rnd(-70.0f, -63.0f) }, 3.0f, 0.5f, 0.0f, 90.0f,{0,0,1}, {1,0,0} },
+        // 장애물
 
-        { MOVE_LEFT, { 2.2,0.1,-3.0 }, 3.0f, 0.5f },
-        { MOVE_RIGHT,  {-2.2,0.1,-3.0 }, 3.0f, 0.5f },
+        { MOVE_RIGHT, {  3.8f, 0.1f, -61.5f }, 3.0f, 0.5f, 0.0f, 90.0f,{0,0,1}, {0,1,0} },
+        { MOVE_LEFT,  {  6.8f, 0.1f, -61.5f }, 3.0f, 0.5f, 0.0f, 90.0f,{0,0,1}, {0,1,0} },
+        { MOVE_RIGHT, {  9.8f, 0.1f, -61.5f }, 3.0f, 0.5f, 0.0f, 90.0f,{0,0,1}, {0,1,0} },
+        { MOVE_LEFT,  {  12.8f, 0.1f, -61.5f }, 3.0f, 0.5f, 0.0f, 90.0f,{0,0,1}, {0,1,0} },
+        { MOVE_RIGHT, {  15.8f, 0.1f, -61.5f }, 3.0f, 0.5f, 0.0f, 90.0f,{0,0,1}, {0,1,0} },
+        { MOVE_LEFT,  {  18.8f, 0.1f, -61.5f }, 3.0f, 0.5f, 0.0f, 90.0f,{0,0,1}, {0,1,0} },
+        { MOVE_RIGHT, {  21.8f, 0.1f, -61.5f }, 3.0f, 0.5f, 0.0f, 90.0f,{0,0,1}, {0,1,0} },
+        { MOVE_LEFT,  {  24.8f, 0.1f, -61.5f }, 3.0f, 0.5f, 0.0f, 90.0f,{0,0,1}, {0,1,0} },
 
-        { MOVE_RIGHT, { 2.2,0.1,-6.0 },  3.0f, 0.5f }, 
-        { MOVE_LEFT,  {-2.2,0.1,-6.0 },  3.0f, 0.5f }, 
-
-        { MOVE_RIGHT, { 2.2,0.1,-15.0 },  3.0f, 0.5f },
-        { MOVE_LEFT,  {-2.2,0.1,-15.0 },  3.0f, 0.5f },
-
-        { MOVE_LEFT, { 2.2,0.1,-18.0 },  3.0f, 0.5f },
-        { MOVE_RIGHT,  {-2.2,0.1,-18.0 },  3.0f, 0.5f },
 
 //-------------------------------------------------------------------------------
         { ROTATE,
          {0, 1.5f, -9.9f}, // pos
          4.0f,             // length
          0.6f,             // spacing
-         {0,0,1},          // axis (애니메이션 회전축)
          0.0f,             // angle (초기 애니메이션 각도)
          0.0f,             // basicangle (기본배치 회전)
+         {0,0,1},          // axis (애니메이션 회전축)
          {0,0,1}           // basicaxis (기본배치 회전축)
         },
 
@@ -91,21 +175,36 @@ void GameManager::LoadStage(int stage)
         {0, 1.5f, -10},   // pos
          4.0f,           // length
          0.6f,           // spacing
-         {0,0,1},        // axis
          90.0f,          // angle
          0.0f,           // basicangle
+         {0,0,1},        // axis
          {0,0,1}         // basicaxis
         },
 
-         { ROTATE,{-3,0.1,-31}, 9.0f, 1.0f, {0,0,1}, 0.0f,90.0f,{1,0,0},0.3,0.3 , 0.6f ,-1},
-         { ROTATE,{-3,0.1,-31}, 9.0f, 1.0f, {0,0,1}, 90.0f,90.0f,{1,0,0},0.3,0.3, 0.6f ,-1},
+         { ROTATE,{-3,0.1,-31}, 9.0f, 1.0f, 0.0f,90.0f,{0,0,1}, {1,0,0},0.3,0.3 , 0.6f ,-1},
+         { ROTATE,{-3,0.1,-31}, 9.0f, 1.0f, 90.0f,90.0f,{0,0,1}, {1,0,0},0.3,0.3, 0.6f ,-1},
 
-         { ROTATE,{3,0.1,-24}, 9.0f, 1.0f, {0,0,1}, 0.0f,90.0f,{1,0,0},0.3,0.3 , 0.6f,1},
-         { ROTATE,{3,0.1,-24}, 9.0f, 1.0f, {0,0,1}, 90.0f,90.0f,{1,0,0},0.3,0.3, 0.6f,1}
+         { ROTATE,{3,0.1,-24}, 9.0f, 1.0f, 0.0f,90.0f,{0,0,1}, {1,0,0},0.3,0.3 , 0.6f,1},
+         { ROTATE,{3,0.1,-24}, 9.0f, 1.0f, 90.0f,90.0f,{0,0,1}, {1,0,0},0.3,0.3, 0.6f,1},
 
+        //{ ROTATE, { 9,0.1,-66 }, 3.0f, 1.0f, 0.0f, 90.0f, { 0,0,1 }, { 1,0,0 }, 0.3, 0.3, 0.6f, 1 },
+        //{ ROTATE, { 9,0.1,-66 }, 3.0f, 1.0f, 90.0f,90.0f,{0,0,1}, {1,0,0},0.3,0.3, 0.6f,1 }
 
+            //glm::vec3 pos;
+            //float length;         // 스틱의 길이
+            //float spacing;        // 뿔의 간격
+            //float angle;          // 회전 장애물 회전각도
+            //float basicangle = 0.0f;
+            //glm::vec3 axis = glm::vec3(0, 0, 1); // 회전 장애물 회전축
+            //glm::vec3 basicaxis = glm::vec3(0, 0, 0); // 기본 도형 회전
+            //float PM_STICK_Y = 0.2f;
+            //float PM_STICK_Z = 0.2f;
+            //float PyramidHeight = 0.2f;
+            //int rotateDir = 1;
         };
     }
+
+
     for (auto& o : stageObjects)
     {
         switch (o.type)
@@ -115,15 +214,15 @@ void GameManager::LoadStage(int stage)
             break;
 
         case 1: // ROTATE
-            rotatingObstacle.emplace_back(o.pos, o.length, o.spacing, o.basicaxis, o.axis, o.basicangle, o.angle, o.PM_Y, o.PM_Z, o.PyramidHeight, o.rotateDir);
+            rotatingObstacle.emplace_back(o.pos, o.length, o.spacing, o.basicaxis, o.axis, o.basicangle, o.angle, o.PM_STICK_Y, o.PM_STICK_Z, o.PyramidHeight, o.rotateDir);
             break;
 
         case 2: // LEFT MOVE
-            basicLeft.emplace_back(o.pos, o.length, o.spacing);
+            basicLeft.emplace_back(o.pos, o.length, o.spacing, o.basicaxis, o.axis, o.basicangle, o.angle);
             break;
 
         case 3: // RIGHT MOVE
-            basicRight.emplace_back(o.pos, o.length, o.spacing);
+            basicRight.emplace_back(o.pos, o.length, o.spacing, o.basicaxis, o.axis, o.basicangle, o.angle);
             break;
         }
     }

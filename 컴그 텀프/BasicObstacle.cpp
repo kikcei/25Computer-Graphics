@@ -3,10 +3,13 @@
 #include "ShapeBuffer.h"
 
                                             // 직사각형 길이 , 가시 간격, 각도
-BasicObstacle_Right::BasicObstacle_Right(glm::vec3 pos, float length, float spacing, float initialAngle)
+BasicObstacle_Right::BasicObstacle_Right(glm::vec3 pos, float length, float spacing, glm::vec3 basicaxis, glm::vec3 axis, float basicangle, float initialAngle)
     : body(pos, glm::vec3(0.3f, 0.3f, length))   // Stick 클래스의 생성자를 호출한다
 {
+    basic_Axis = basicaxis;
+    basic_angle = basicangle;
     angle = initialAngle;
+    rotationAxis = axis;
 
     int count = length / spacing;
 
@@ -39,6 +42,7 @@ void BasicObstacle_Right::Draw_Right(const glm::mat4& view, const glm::mat4& pro
 
     // 벽의 중심을 기준으로 회전
     model = glm::translate(model, body.pos);              // 1) 중심으로 이동
+    model = glm::rotate(model, glm::radians(basic_angle), basic_Axis); // 기본 도형 회전
     model = glm::rotate(model, glm::radians(angle), rotationAxis); // 2) 회전
     model = glm::translate(model, -body.pos);             // 3) 다시 원래자리로 이동
 
@@ -83,10 +87,13 @@ void BasicObstacle_Right::Update_Right(float dt)
 //=============================================================================================================================================================
 
 // 직사각형 길이 , 가시 간격, 각도
-BasicObstacle_Left::BasicObstacle_Left(glm::vec3 pos, float length, float spacing, float initialAngle)
+BasicObstacle_Left::BasicObstacle_Left(glm::vec3 pos, float length, float spacing, glm::vec3 basicaxis, glm::vec3 axis, float basicangle, float initialAngle)
 	: body(pos, glm::vec3(0.3f, 0.3f, length))   // Stick 클래스의 생성자를 호출한다
 {
-	angle = initialAngle;
+    basic_Axis = basicaxis;
+    basic_angle = basicangle;
+    angle = initialAngle;
+    rotationAxis = axis;
 
 	int count = length / spacing;
 
@@ -119,7 +126,8 @@ void BasicObstacle_Left::Draw_Left(const glm::mat4& view, const glm::mat4& proj,
 
 	// 벽의 중심을 기준으로 회전
 	model = glm::translate(model, body.pos);              // 1) 중심으로 이동
-	model = glm::rotate(model, glm::radians(angle), rotationAxis); // 2) 회전
+    model = glm::rotate(model, glm::radians(basic_angle), basic_Axis); // 기본 도형 회전
+    model = glm::rotate(model, glm::radians(angle), rotationAxis); // 2) 회전
 	model = glm::translate(model, -body.pos);             // 3) 다시 원래자리로 이동
 
 	// ===== Stick 그리기 =====

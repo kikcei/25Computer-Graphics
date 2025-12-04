@@ -40,7 +40,7 @@ void Skybox::Draw(const glm::mat4& view, const glm::mat4& proj)
     // 3) VAO 바인딩 & Draw
     // -----------------------------
     glBindVertexArray(vao_skybox);
-    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+    glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_INT, 0);
 
     // -----------------------------
     // 4) 정리
