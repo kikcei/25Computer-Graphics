@@ -34,8 +34,8 @@ BoatSystem boat;
 float lastTime = 0.0f;
 
 float cameraX = 0.0f;
-float cameraZ = -60.0f;
-float cameraYaw = 90.0f;
+float cameraZ = 3.0f;
+float cameraYaw = 0.0f;
 //------------------------------
 GameManager gamemanager;
 //------------------------------

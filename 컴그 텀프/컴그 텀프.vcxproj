@@ -133,6 +133,7 @@
     <ClCompile Include="graphics.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Matrix.cpp" />
+    <ClCompile Include="MoveWall.cpp" />
     <ClCompile Include="OBJLoader.cpp" />
     <ClCompile Include="Pyramid.cpp" />
     <ClCompile Include="PyramidWall.cpp" />
@@ -150,6 +151,7 @@
     <ClInclude Include="graphics.h" />
     <ClInclude Include="Matrix.h" />
     <ClInclude Include="Game_Manager.h" />
+    <ClInclude Include="MoveWall.h" />
     <ClInclude Include="OBJLoader.h" />
     <ClInclude Include="Pyramid.h" />
     <ClInclude Include="PyramidWall.h" />
