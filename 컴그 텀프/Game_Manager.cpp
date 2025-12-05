@@ -38,15 +38,15 @@ void GameManager::LoadStage(int stage)
     movewall.clear();
 
     movewall.emplace_back(
-        glm::vec3(0,0,0),     // 벽 위치
-        glm::vec3(2.0, 2.0, 1.0f),    // 벽 크기
+        glm::vec3(3,3,-90.0f),     // 벽 위치
+        glm::vec3(1.4, 1.4, 1.0f),    // 벽 크기
         0.20f,                    // 스파이크 크기
         0.2f,                     // 간격
-        0.0f                     // 회전
+        0.0f                      // 회전
     );
-    movewall.back().SetMoveRange(
-        glm::vec3(-3, 1, -20),
-        glm::vec3(3, 1, -10),
+    movewall.back().SetMoveRange( 
+        glm::vec3(0,0,-90.0f),        // 최소 x, y, z
+        glm::vec3(3,3,0.0f),        // 최대 x, y, z
         1.0f // 속도
     );
     if (stage == 1)
