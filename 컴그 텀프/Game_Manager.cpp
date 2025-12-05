@@ -2,6 +2,7 @@
 #include "ShapeBuffer.h"
 #include "globals.h"
 
+
 GameManager::GameManager() 
 {
    
@@ -205,12 +206,24 @@ void GameManager::LoadStage(int stage)
             //float PyramidHeight = 0.2f;
             //int rotateDir = 1;
 //-------------------------------------------------------------------------------
-        { TRAP, { 0,-0.1f,-5}, 3.0f, 3.0f },
-
+        { TRAP, { 0,-0.13f,-5}, 3.0f, 3.0f },
 
 
         };
     }
+
+    trap.emplace_back(glm::vec3(0, -0.13f, -10), glm::vec3(3, 0.3f, 3));
+    trap.back().SetSpeed(1.4f);   // Trap의 가시 올라오는 속도 조절
+
+// waveTraps
+//--------------------------------------------------------------------------------------------
+    waveTraps.emplace_back(glm::vec3(0, -0.1f, -5), glm::vec3(3, 0.3f, 3));
+
+
+
+
+
+
 
     // MoveWall
     //--------------------------------------------------------------------------------------------
@@ -259,6 +272,7 @@ void GameManager::LoadStage(int stage)
 
 void GameManager::Update(float dt)
 {
+
     for (auto& w : rotatingObstacle)
         w.Update(dt);
 
@@ -271,10 +285,11 @@ void GameManager::Update(float dt)
     for (auto& w : movewall)
         w.Update(dt);
 
-    glm::vec3 boatPos(boatPosX, boatPosY, boatPosZ);   // 전역 변수 사용
-
     for (auto& t : trap)
-        t.Update(boatPos);
+        t.Update(dt);
+
+    for (auto& wt : waveTraps)
+        wt.Update(dt);
 }
 
 void GameManager::Draw(const glm::mat4& view, const glm::mat4& proj, GLuint mvpLoc)
@@ -309,4 +324,7 @@ void GameManager::Draw(const glm::mat4& view, const glm::mat4& proj, GLuint mvpL
     // 함정 장애물
     for (auto& w : trap)
         w.Draw(view, proj, mvpLoc);
+
+    for (auto& wt : waveTraps)
+        wt.Draw(view, proj, mvpLoc);
 }

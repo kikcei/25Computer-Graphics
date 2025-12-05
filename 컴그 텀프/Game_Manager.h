@@ -8,7 +8,7 @@
 #include "Skybox.h"
 #include "MoveWall.h"
 #include "Trap.h"
-
+#include "WaveTrap.h"
 
 enum ObjType { FLOOR = 0, ROTATE = 1, MOVE_LEFT = 2, MOVE_RIGHT = 3,  TRAP = 4 };
 
@@ -39,6 +39,7 @@ public:
     std::vector<BasicObstacle_Left> basicLeft;
     std::vector<MoveWall> movewall;
     std::vector<Trap> trap;
+    std::vector<WaveTrap> waveTraps;
 
     std::vector<ObjectData> stageObjects;
 

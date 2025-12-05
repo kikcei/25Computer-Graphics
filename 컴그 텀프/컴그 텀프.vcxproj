@@ -142,6 +142,7 @@
     <ClCompile Include="Skybox.cpp" />
     <ClCompile Include="Stick.cpp" />
     <ClCompile Include="Trap.cpp" />
+    <ClCompile Include="WaveTrap.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BasicObstacle.h" />
@@ -164,6 +165,7 @@
     </ClInclude>
     <ClInclude Include="Stick.h" />
     <ClInclude Include="Trap.h" />
+    <ClInclude Include="WaveTrap.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="fragment.glsl" />
