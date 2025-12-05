@@ -22,6 +22,11 @@ GLuint vao_movewall;
 GLuint vbo_movewall[2];
 GLuint ebo_movewall;
 
+GLuint vao_trap;
+GLuint vbo_trap[2];
+GLuint ebo_trap;
+
+
 // ======================================================
 // Stick Geometry
 // ======================================================
@@ -407,4 +412,90 @@ void UpdateMoveWallColor(float r, float g, float b)
 
     glBindBuffer(GL_ARRAY_BUFFER, vbo_movewall[1]);
     glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(movewallColors), movewallColors);
+}
+
+// ======================================================
+// Trap (함정 전용)
+// ======================================================
+
+GLfloat trapVertices[4][3] =
+{
+    { -0.5f,  0.5f, -0.5f },   // top-left-front
+    {  0.5f,  0.5f, -0.5f },   // top-right-front
+    {  0.5f,  0.5f,  0.5f },   // top-right-back
+    { -0.5f,  0.5f,  0.5f }    // top-left-back
+};
+
+GLuint trap_Indices[6] =
+{
+    0, 1, 2,
+    2, 3, 0
+};
+
+GLfloat trapColors[4][3];
+
+void InitTrapModel()
+{
+    glUseProgram(shaderProgramID);
+
+    // 기본 색상 (밝은 회색)
+    for (int i = 0; i < 4; i++)
+    {
+        float t = i / 3.0f;  // 0 → 1로 증가 (그라데이션 강제)
+
+        // 기본 어두운 색 (딥 그레이)
+        float baseR = 0.18f;
+        float baseG = 0.18f;
+        float baseB = 0.20f;
+
+        // 그라데이션 밝기(약간만)
+        float gradR = 0.10f;
+        float gradG = 0.08f;
+        float gradB = 0.06f;
+
+        trapColors[i][0] = glm::clamp(baseR + t * gradR, 0.0f, 1.0f);
+        trapColors[i][1] = glm::clamp(baseG + t * gradG, 0.0f, 1.0f);
+        trapColors[i][2] = glm::clamp(baseB + t * gradB, 0.0f, 1.0f);
+    }
+
+    glGenVertexArrays(1, &vao_trap);
+    glBindVertexArray(vao_trap);
+
+    glGenBuffers(2, vbo_trap);
+    glGenBuffers(1, &ebo_trap);
+
+    // -------------------------
+    // 위치 버퍼
+    // -------------------------
+    glBindBuffer(GL_ARRAY_BUFFER, vbo_trap[0]);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(trapVertices), trapVertices, GL_STATIC_DRAW);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
+    glEnableVertexAttribArray(0);
+
+    // -------------------------
+    // 색상 버퍼
+    // -------------------------
+    glBindBuffer(GL_ARRAY_BUFFER, vbo_trap[1]);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(trapColors), trapColors, GL_DYNAMIC_DRAW);
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 0, 0);
+    glEnableVertexAttribArray(1);
+
+    // -------------------------
+    // 인덱스 버퍼 (윗면만)
+    // -------------------------
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ebo_trap);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(trap_Indices), trap_Indices, GL_STATIC_DRAW);
+}
+
+void UpdateTrapColor(float r, float g, float b)
+{
+    for (int i = 0; i < 4; i++)
+    {
+        trapColors[i][0] = r;
+        trapColors[i][1] = g;
+        trapColors[i][2] = b;
+    }
+
+    glBindBuffer(GL_ARRAY_BUFFER, vbo_trap[1]);
+    glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(trapColors), trapColors);
 }

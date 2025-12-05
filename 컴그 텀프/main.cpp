@@ -177,6 +177,7 @@ int main(int argc, char** argv)
     InitFloorModel();
     InitSkyboxModel();
     InitMoveWallModel();
+    InitTrapModel();
 
     gamemanager.LoadStage(1);
 

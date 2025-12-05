@@ -56,12 +56,18 @@ extern GLuint ebo_movewallk;
 void InitMoveWallModel();
 void UpdateMoveWallColor(float r, float g, float b);
 
+// ==============================
+// Trap (함정 모델)
+// ==============================
+extern GLuint vao_trap;
+extern GLuint vbo_trap[2];
+extern GLuint ebo_trap;
+
+void InitTrapModel();
+void UpdateTrapColor(float r, float g, float b);
+
 //------------------------------------------------------------------------------
 // 
-// MoveWall 관련
-extern GLfloat movewallVertices[8][3];
-extern GLuint  movewall_Indices[36];
-extern GLfloat movewallColors[8][3];
 
 // Stick 관련
 extern GLfloat stickVertices[8][3];
@@ -80,3 +86,13 @@ extern unsigned int skyIndices[/* 정확한 크기 */];
 // Floor 관련
 extern GLfloat floorVertices[20];
 extern GLuint  floorIndices[6];
+
+// MoveWall 관련
+extern GLfloat movewallVertices[8][3];
+extern GLuint  movewall_Indices[36];
+extern GLfloat movewallColors[8][3];
+
+// Trap 관련
+extern GLfloat trapVertices[4][3];
+extern GLuint  trap_Indices[6];
+extern GLfloat trapColors[4][3];

@@ -141,6 +141,7 @@
     <ClCompile Include="ShapeBuffer.cpp" />
     <ClCompile Include="Skybox.cpp" />
     <ClCompile Include="Stick.cpp" />
+    <ClCompile Include="Trap.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BasicObstacle.h" />
@@ -162,6 +163,7 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</ExcludedFromBuild>
     </ClInclude>
     <ClInclude Include="Stick.h" />
+    <ClInclude Include="Trap.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="fragment.glsl" />

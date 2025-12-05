@@ -1,5 +1,6 @@
 #include "Game_Manager.h"
 #include "ShapeBuffer.h"
+#include "globals.h"
 
 GameManager::GameManager() 
 {
@@ -37,18 +38,7 @@ void GameManager::LoadStage(int stage)
     basicLeft.clear();
     movewall.clear();
 
-    movewall.emplace_back(
-        glm::vec3(3,3,-90.0f),     // 벽 위치
-        glm::vec3(1.4, 1.4, 1.0f),    // 벽 크기
-        0.20f,                    // 스파이크 크기
-        0.2f,                     // 간격
-        0.0f                      // 회전
-    );
-    movewall.back().SetMoveRange( 
-        glm::vec3(0,0,-90.0f),        // 최소 x, y, z
-        glm::vec3(3,3,0.0f),        // 최대 x, y, z
-        1.0f // 속도
-    );
+    
     if (stage == 1)
     {
         stageObjects = {
@@ -214,9 +204,29 @@ void GameManager::LoadStage(int stage)
             //float PM_STICK_Z = 0.2f;
             //float PyramidHeight = 0.2f;
             //int rotateDir = 1;
+//-------------------------------------------------------------------------------
+        { TRAP, { 0,-0.1f,-5}, 3.0f, 3.0f },
+
+
+
         };
     }
 
+    // MoveWall
+    //--------------------------------------------------------------------------------------------
+    movewall.emplace_back(
+        glm::vec3(3, 3, -90.0f),     // 벽 위치
+        glm::vec3(1.4, 1.4, 0.6f),    // 벽 크기
+        0.20f,                    // 스파이크 크기
+        0.2f,                     // 간격
+        0.0f                      // 회전
+    );
+    movewall.back().SetMoveRange(
+        glm::vec3(0, 0, -90.0f),        // 최소 x, y, z
+        glm::vec3(3, 3, 0.0f),        // 최대 x, y, z
+        1.0f // 속도
+    );
+    //--------------------------------------------------------------------------------------------
 
     for (auto& o : stageObjects)
     {
@@ -238,6 +248,9 @@ void GameManager::LoadStage(int stage)
             basicRight.emplace_back(o.pos, o.length, o.spacing, o.basicaxis, o.axis, o.basicangle, o.angle);
             break;
 
+        case 4: // TRAP
+            trap.emplace_back(o.pos, glm::vec3(o.length, 0.3f, o.spacing));
+            break;
 
         }
     }
@@ -257,6 +270,11 @@ void GameManager::Update(float dt)
 
     for (auto& w : movewall)
         w.Update(dt);
+
+    glm::vec3 boatPos(boatPosX, boatPosY, boatPosZ);   // 전역 변수 사용
+
+    for (auto& t : trap)
+        t.Update(boatPos);
 }
 
 void GameManager::Draw(const glm::mat4& view, const glm::mat4& proj, GLuint mvpLoc)
@@ -286,5 +304,9 @@ void GameManager::Draw(const glm::mat4& view, const glm::mat4& proj, GLuint mvpL
 
     // 움직이는 벽 장애물
     for (auto& w : movewall)
+        w.Draw(view, proj, mvpLoc);
+
+    // 함정 장애물
+    for (auto& w : trap)
         w.Draw(view, proj, mvpLoc);
 }

@@ -7,9 +7,10 @@
 #include "Floor.h"
 #include "Skybox.h"
 #include "MoveWall.h"
+#include "Trap.h"
 
 
-enum ObjType { FLOOR = 0, ROTATE = 1, MOVE_LEFT = 2, MOVE_RIGHT = 3,  MOVE_WALL = 4 };
+enum ObjType { FLOOR = 0, ROTATE = 1, MOVE_LEFT = 2, MOVE_RIGHT = 3,  TRAP = 4 };
 
 struct ObjectData
 {
@@ -37,7 +38,8 @@ public:
     std::vector<BasicObstacle_Right> basicRight;
     std::vector<BasicObstacle_Left> basicLeft;
     std::vector<MoveWall> movewall;
-   
+    std::vector<Trap> trap;
+
     std::vector<ObjectData> stageObjects;
 
     GameManager();
