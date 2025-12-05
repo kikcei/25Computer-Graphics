@@ -33,8 +33,8 @@ BoatSystem boat;
 
 float lastTime = 0.0f;
 
-float cameraX = 0.0f;
-float cameraZ = 3.0f;
+float cameraX = 3.0f;
+float cameraZ = -50.0f;
 float cameraYaw = 0.0f;
 //------------------------------
 GameManager gamemanager;
@@ -56,7 +56,7 @@ void drawScene()
     forward.z = -cos(rad);
     forward.y = 0.0f;
 
-    glm::vec3 eye = glm::vec3(cameraX, 1.5f, cameraZ);
+    glm::vec3 eye = glm::vec3(cameraX, 1.8f, cameraZ);
     glm::vec3 center = eye + forward;
 
     glm::mat4 view = glm::lookAt(eye, center, glm::vec3(0, 1, 0));
@@ -110,16 +110,16 @@ void keyboard(unsigned char key, int x, int y)
 
 	switch (key)
 	{
-    case 'w':
+    case 'd':
         cameraX += 3.0f;;
         break;
-    case 's':
+    case 'a':
         cameraX -= 3.0f;;
         break;
-    case 'a':
+    case 'w':
         cameraZ -= 3.0f;;
         break;
-    case 'd':
+    case 's':
         cameraZ += 3.0f;;
         break;
     case 'j':  // ¿ÞÂÊ È¸Àü

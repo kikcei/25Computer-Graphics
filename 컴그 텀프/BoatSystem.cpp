@@ -264,7 +264,7 @@ void BoatSystem::KeyDown(unsigned char key)
     if (key == 'z') // LEFT stroke
     {
         boatRotVel -= 0.3f;   // 왼쪽 stroke → 보트 오른쪽으로 돌려야 함
-        speed += 0.3f;
+        speed += 0.5f;
 
         leftRotZ = oarPullAngle;
         leftVelZ = -oarSnapForce;
@@ -273,7 +273,7 @@ void BoatSystem::KeyDown(unsigned char key)
     if (key == 'm') // RIGHT stroke
     {
         boatRotVel += 0.3f;   // 오른쪽 stroke → 보트 왼쪽으로 돌려야 함
-        speed += 0.3f;
+        speed += 0.5f;
 
         rightRotZ = -oarPullAngle;
         rightVelZ = oarSnapForce;

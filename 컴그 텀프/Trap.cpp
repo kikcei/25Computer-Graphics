@@ -35,6 +35,12 @@ void Trap::SetSpeed(float s)
 // Update ----------------------------------------
 void Trap::Update(float dt)
 {
+    timer += dt;
+
+    if (timer < startDelay)
+    {
+        return;  // 아직 시작 시간 전이므로 spikeHeight 변화 없음
+    }
     spikeHeight += direction * speed * dt;
 
     if (spikeHeight >= 0.15f)

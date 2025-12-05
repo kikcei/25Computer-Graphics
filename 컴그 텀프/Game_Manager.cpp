@@ -94,6 +94,36 @@ void GameManager::LoadStage(int stage)
         { FLOOR, { 25,0,-85}, 5.0f, 5.0f },
         { FLOOR, { 25,0,-90}, 5.0f, 5.0f },
 
+        { FLOOR, { 20,0,-90}, 5.0f, 5.0f },
+        { FLOOR, { 30,0,-90}, 5.0f, 5.0f },
+        { FLOOR, { 20,0,-95}, 5.0f, 5.0f },
+        { FLOOR, { 25,0,-95}, 5.0f, 5.0f },
+        { FLOOR, { 30,0,-95}, 5.0f, 5.0f },
+        { FLOOR, { 20,0,-100}, 5.0f, 5.0f },
+        { FLOOR, { 25,0,-100}, 5.0f, 5.0f },
+        { FLOOR, { 30,0,-100}, 5.0f, 5.0f },
+        { FLOOR, { 20,0,-105}, 5.0f, 5.0f },
+        { FLOOR, { 25,0,-105}, 5.0f, 5.0f },
+        { FLOOR, { 30,0,-105}, 5.0f, 5.0f },
+        { FLOOR, { 20,0,-110}, 5.0f, 5.0f },
+        { FLOOR, { 25,0,-110}, 5.0f, 5.0f },
+        { FLOOR, { 30,0,-110}, 5.0f, 5.0f },
+       
+        { FLOOR, { 25,0,-115}, 5.0f, 5.0f },
+       
+        { FLOOR, { 20,0,-120}, 5.0f, 5.0f },
+        { FLOOR, { 25,0,-120}, 5.0f, 5.0f },
+       
+        { FLOOR, { 25,0,-125}, 5.0f, 5.0f },
+     
+        { FLOOR, { 25,0,-130}, 5.0f, 5.0f },
+        { FLOOR, { 30,0,-130}, 5.0f, 5.0f },
+      
+        { FLOOR, { 25,0,-135}, 5.0f, 5.0f },
+      
+        { FLOOR, { 25,0,-140}, 5.0f, 5.0f },
+        { FLOOR, { 25,0,-145}, 5.0f, 5.0f },
+        { FLOOR, { 25,0,-150}, 5.0f, 5.0f },
 //-------------------------------------------------------------------------------
         { MOVE_RIGHT, {  2.2f, 0.1f,   0.0f }, 3.0f, 0.5f, 0.0f, 0.0f, {0,0,1}, {0,0,1} },
         { MOVE_LEFT,  { -2.2f, 0.1f,   0.0f }, 3.0f, 0.5f, 0.0f, 0.0f, {0,0,1}, {0,0,1} },
@@ -135,7 +165,7 @@ void GameManager::LoadStage(int stage)
         { MOVE_RIGHT, {  11.4f, 0.1f, -72.0f }, 3.0f, 0.5f, 0.0f, 90.0f,{0,0,1}, {0,1,0} },
         { MOVE_LEFT,  {  14.4f, 0.1f, -72.0f }, 3.0f, 0.5f, 0.0f, 90.0f,{0,0,1}, {0,1,0} },
         { MOVE_RIGHT, {  17.4f, 0.1f, -72.0f }, 3.0f, 0.5f, 0.0f, 90.0f,{0,0,1}, {0,1,0} },
-        { MOVE_LEFT,  {  20.4f, 0.1f, -72.0f }, 3.0f, 0.5f, 0.0f, 90.0f,{0,0,1}, {0,1,0} },
+        { MOVE_LEFT,  {  20.65f, 0.1f, -72.0f }, 3.5f, 0.5f, 0.0f, 90.0f,{0,0,1}, {0,1,0} },
         
         // 장애물
         { MOVE_RIGHT, { rnd(-1.0f,22.0f), -0.12f, rnd(-70.0f, -63.0f) }, 3.0f, 0.5f, 0.0f, 90.0f,{0,0,1}, {1,0,0} },
@@ -145,13 +175,13 @@ void GameManager::LoadStage(int stage)
         { MOVE_RIGHT, { rnd(-1.0f,22.0f), -0.12f, rnd(-70.0f, -63.0f) }, 3.0f, 0.5f, 0.0f, 90.0f,{0,0,1}, {1,0,0} },
         { MOVE_RIGHT, { rnd(-1.0f,22.0f), -0.12f, rnd(-70.0f, -63.0f) }, 3.0f, 0.5f, 0.0f, 90.0f,{0,0,1}, {1,0,0} },
         { MOVE_RIGHT, { rnd(-1.0f,22.0f), -0.12f, rnd(-70.0f, -63.0f) }, 3.0f, 0.5f, 0.0f, 90.0f,{0,0,1}, {1,0,0} },
-        { MOVE_RIGHT, { rnd(-1.0f,22.0f), -0.12f, rnd(-70.0f, -63.0f) }, 3.0f, 0.5f, 0.0f, 90.0f,{0,0,1}, {1,0,0} },
-        { MOVE_RIGHT, { rnd(-1.0f,22.0f), -0.12f, rnd(-70.0f, -63.0f) }, 3.0f, 0.5f, 0.0f, 90.0f,{0,0,1}, {1,0,0} },
-        { MOVE_RIGHT, { rnd(-1.0f,22.0f), -0.12f, rnd(-70.0f, -63.0f) }, 3.0f, 0.5f, 0.0f, 90.0f,{0,0,1}, {1,0,0} },
-        { MOVE_RIGHT, { rnd(-1.0f,22.0f), -0.12f, rnd(-70.0f, -63.0f) }, 3.0f, 0.5f, 0.0f, 90.0f,{0,0,1}, {1,0,0} },
-        { MOVE_RIGHT, { rnd(-1.0f,22.0f), -0.12f, rnd(-70.0f, -63.0f) }, 3.0f, 0.5f, 0.0f, 90.0f,{0,0,1}, {1,0,0} },
-        { MOVE_RIGHT, { rnd(-1.0f,22.0f), -0.12f, rnd(-70.0f, -63.0f) }, 3.0f, 0.5f, 0.0f, 90.0f,{0,0,1}, {1,0,0} },
-        { MOVE_RIGHT, { rnd(-1.0f,22.0f), -0.12f, rnd(-70.0f, -63.0f) }, 3.0f, 0.5f, 0.0f, 90.0f,{0,0,1}, {1,0,0} },
+        { MOVE_LEFT, { rnd(-1.0f,22.0f), -0.12f, rnd(-70.0f, -63.0f) }, 3.0f, 0.5f, 0.0f, 90.0f,{0,0,1}, {1,0,0} },
+        { MOVE_LEFT, { rnd(-1.0f,22.0f), -0.12f, rnd(-70.0f, -63.0f) }, 3.0f, 0.5f, 0.0f, 90.0f,{0,0,1}, {1,0,0} },
+        { MOVE_LEFT, { rnd(-1.0f,22.0f), -0.12f, rnd(-70.0f, -63.0f) }, 3.0f, 0.5f, 0.0f, 90.0f,{0,0,1}, {1,0,0} },
+        { MOVE_LEFT, { rnd(-1.0f,22.0f), -0.12f, rnd(-70.0f, -63.0f) }, 3.0f, 0.5f, 0.0f, 90.0f,{0,0,1}, {1,0,0} },
+        { MOVE_LEFT, { rnd(-1.0f,22.0f), -0.12f, rnd(-70.0f, -63.0f) }, 3.0f, 0.5f, 0.0f, 90.0f,{0,0,1}, {1,0,0} },
+        { MOVE_LEFT, { rnd(-1.0f,22.0f), -0.12f, rnd(-70.0f, -63.0f) }, 3.0f, 0.5f, 0.0f, 90.0f,{0,0,1}, {1,0,0} },
+        { MOVE_LEFT, { rnd(-1.0f,22.0f), -0.12f, rnd(-70.0f, -63.0f) }, 3.0f, 0.5f, 0.0f, 90.0f,{0,0,1}, {1,0,0} },
         // 장애물
 
         { MOVE_RIGHT, {  3.8f, 0.1f, -61.5f }, 3.0f, 0.5f, 0.0f, 90.0f,{0,0,1}, {0,1,0} },
@@ -161,8 +191,21 @@ void GameManager::LoadStage(int stage)
         { MOVE_RIGHT, {  15.8f, 0.1f, -61.5f }, 3.0f, 0.5f, 0.0f, 90.0f,{0,0,1}, {0,1,0} },
         { MOVE_LEFT,  {  18.8f, 0.1f, -61.5f }, 3.0f, 0.5f, 0.0f, 90.0f,{0,0,1}, {0,1,0} },
         { MOVE_RIGHT, {  21.8f, 0.1f, -61.5f }, 3.0f, 0.5f, 0.0f, 90.0f,{0,0,1}, {0,1,0} },
-        { MOVE_LEFT,  {  24.8f, 0.1f, -61.5f }, 3.0f, 0.5f, 0.0f, 90.0f,{0,0,1}, {0,1,0} },
+        { MOVE_LEFT,  {  25.3f, 0.1f, -61.5f }, 4.0f, 0.5f, 0.0f, 90.0f,{0,0,1}, {0,1,0} },
 
+        { MOVE_RIGHT, {  27.2f, 0.1f, -63.0f }, 3.0f, 0.5f, 0.0f, 0.0f, {0,0,1}, {0,0,1} },
+        { MOVE_RIGHT, {  27.2f, 0.1f, -66.0f }, 3.0f, 0.5f, 0.0f, 0.0f, {0,0,1}, {0,0,1} },
+        { MOVE_LEFT, {  27.2f, 0.1f, -69.0f }, 3.0f, 0.5f, 0.0f, 0.0f, {0,0,1}, {0,0,1} },
+        { MOVE_LEFT, {  27.2f, 0.1f, -71.0f }, 2.0f, 0.5f, 0.0f, 0.0f, {0,0,1}, {0,0,1} },
+
+        { MOVE_RIGHT, {  27.2f, 0.1f, -73.5f }, 3.0f, 0.5f, 0.0f, 0.0f, {0,0,1}, {0,0,1} },
+        { MOVE_RIGHT, {  27.2f, 0.1f, -76.5f }, 3.0f, 0.5f, 0.0f, 0.0f, {0,0,1}, {0,0,1} },
+        { MOVE_LEFT, {  22.8f, 0.1f, -73.5f }, 3.0f, 0.5f, 0.0f, 0.0f, {0,0,1}, {0,0,1} },
+        { MOVE_LEFT, {  22.8f, 0.1f, -76.5f }, 3.0f, 0.5f, 0.0f, 0.0f, {0,0,1}, {0,0,1} },
+        { MOVE_LEFT, {  27.2f, 0.1f, -79.5f }, 3.0f, 0.5f, 0.0f, 0.0f, {0,0,1}, {0,0,1} },
+        { MOVE_LEFT, {  27.2f, 0.1f, -82.5f }, 3.0f, 0.5f, 0.0f, 0.0f, {0,0,1}, {0,0,1} },
+        { MOVE_RIGHT, {  22.8f, 0.1f, -79.5f }, 3.0f, 0.5f, 0.0f, 0.0f, {0,0,1}, {0,0,1} },
+        { MOVE_RIGHT, {  22.8f, 0.1f, -82.5f }, 3.0f, 0.5f, 0.0f, 0.0f, {0,0,1}, {0,0,1} },
 
 //-------------------------------------------------------------------------------
         { ROTATE,
@@ -191,9 +234,11 @@ void GameManager::LoadStage(int stage)
          { ROTATE,{3,0.1,-24}, 9.0f, 1.0f, 0.0f,90.0f,{0,0,1}, {1,0,0},0.3,0.3 , 0.6f,1},
          { ROTATE,{3,0.1,-24}, 9.0f, 1.0f, 90.0f,90.0f,{0,0,1}, {1,0,0},0.3,0.3, 0.6f,1},
 
-        //{ ROTATE, { 9,0.1,-66 }, 3.0f, 1.0f, 0.0f, 90.0f, { 0,0,1 }, { 1,0,0 }, 0.3, 0.3, 0.6f, 1 },
-        //{ ROTATE, { 9,0.1,-66 }, 3.0f, 1.0f, 90.0f,90.0f,{0,0,1}, {1,0,0},0.3,0.3, 0.6f,1 }
+       
 
+        { ROTATE, { 21.5,0,-110}, 10.0f, 1.0f, 0.0f,0.0f, {0,0,1}, {0,1,0},1.0,1.0, 0.0f,-1},
+        { ROTATE, { 28.5,0,-110}, 10.0f, 1.0f, 0.0f,0.0f, {0,0,1}, {0,1,0},1.0,1.0, 0.0f,1 },
+      
             //glm::vec3 pos;
             //float length;         // 스틱의 길이
             //float spacing;        // 뿔의 간격
@@ -206,19 +251,34 @@ void GameManager::LoadStage(int stage)
             //float PyramidHeight = 0.2f;
             //int rotateDir = 1;
 //-------------------------------------------------------------------------------
-        { TRAP, { 0,-0.13f,-5}, 3.0f, 3.0f },
-
-
         };
     }
 
-    trap.emplace_back(glm::vec3(0, -0.13f, -10), glm::vec3(3, 0.3f, 3));
-    trap.back().SetSpeed(1.4f);   // Trap의 가시 올라오는 속도 조절
+    trap.emplace_back(glm::vec3(-1.15, -0.13f, -40), glm::vec3(1.801f, 0.3f, 1.801f));
+    trap.back().SetSpeed(1.4f);  
+    trap.back().SetStartDelay(0.0f);  
+
+    trap.emplace_back(glm::vec3(1.15, -0.13f, -45), glm::vec3(1.801f, 0.3f, 1.801f));
+    trap.back().SetSpeed(1.4f);  
+    trap.back().SetStartDelay(0.5f); 
+
+    trap.emplace_back(glm::vec3(-1.15, -0.13f, -50), glm::vec3(1.801f, 0.3f, 1.801f));
+    trap.back().SetSpeed(1.4f);   
+    trap.back().SetStartDelay(0.0f);   
+
+    trap.emplace_back(glm::vec3(1.15, -0.13f, -55), glm::vec3(1.801f, 0.3f, 1.801f));
+    trap.back().SetSpeed(1.4f);
+    trap.back().SetStartDelay(0.5f);
+
+    trap.emplace_back(glm::vec3(-1.15, -0.13f, -60), glm::vec3(1.801f, 0.3f, 1.801f));
+    trap.back().SetSpeed(1.4f);
+    trap.back().SetStartDelay(0.0f);
 
 // waveTraps
 //--------------------------------------------------------------------------------------------
-    waveTraps.emplace_back(glm::vec3(0, -0.1f, -5), glm::vec3(3, 0.3f, 3));
-
+   waveTraps.emplace_back(glm::vec3(25, -0.13f, -126), glm::vec3(3, 0.3f, 30));
+   waveTraps.back().speed = 0.85f;     // 웨이브 주기 속도
+  
 
 
 
@@ -227,18 +287,33 @@ void GameManager::LoadStage(int stage)
 
     // MoveWall
     //--------------------------------------------------------------------------------------------
-    movewall.emplace_back(
-        glm::vec3(3, 3, -90.0f),     // 벽 위치
-        glm::vec3(1.4, 1.4, 0.6f),    // 벽 크기
-        0.20f,                    // 스파이크 크기
-        0.2f,                     // 간격
-        0.0f                      // 회전
-    );
-    movewall.back().SetMoveRange(
-        glm::vec3(0, 0, -90.0f),        // 최소 x, y, z
-        glm::vec3(3, 3, 0.0f),        // 최대 x, y, z
-        1.0f // 속도
-    );
+   
+   // -------------------- MoveWall #1 --------------------
+    movewall.emplace_back(glm::vec3(3, 3, -90), glm::vec3(1.4f, 1.4f, 0.2f), 0.2f, 0.2f, 0.0f);
+    movewall.back().SetMoveRange(glm::vec3(19, 1, -90), glm::vec3(31, 1, -90), 1.7f);
+
+    // -------------------- MoveWall #2 --------------------
+    movewall.emplace_back(glm::vec3(0, 0, -90), glm::vec3(1.0f, 1.0f, 0.2f), 0.2f, 0.2f, 45.0f);
+    movewall.back().SetMoveRange(glm::vec3(19, 1, -97), glm::vec3(31, 1, -92), 2.5f);
+    movewall.emplace_back(glm::vec3(0, 0, -90), glm::vec3(1.0f, 1.0f, 0.2f), 0.2f, 0.2f, -45.0f);
+    movewall.back().SetMoveRange(glm::vec3(19, 1, -97), glm::vec3(31, 1, -92), 2.5f);
+
+  
+    movewall.emplace_back(glm::vec3(31, 0, -90), glm::vec3(1.0f, 1.0f, 0.2f), 0.2f, 0.2f, 45.0f);
+    movewall.back().SetMoveRange(glm::vec3(19, 1, -97), glm::vec3(31, 1, -92), 2.5f);
+    movewall.emplace_back(glm::vec3(31, 0, -90), glm::vec3(1.0f, 1.0f, 0.2f), 0.2f, 0.2f, -45.0f);
+    movewall.back().SetMoveRange(glm::vec3(19, 1, -97), glm::vec3(31, 1, -92), 2.5f);
+
+    movewall.emplace_back(glm::vec3(3, 3, -90), glm::vec3(8.0f, 8.0f, 0.2f), 0.2f, 0.2f, 0.0f);
+    movewall.back().SetMoveRange(glm::vec3(29, 1, -103), glm::vec3(33, 1, -103), 1.7f);
+    movewall.emplace_back(glm::vec3(3, 3, -90), glm::vec3(8.0f, 8.0f, 0.2f), 0.2f, 0.2f, 0.0f);
+    movewall.back().SetMoveRange(glm::vec3(17, 1, -103), glm::vec3(21, 1, -103), 1.7f);
+
+
+    movewall.emplace_back(glm::vec3(25, 0, -115), glm::vec3(1.0f, 1.0f, 0.2f), 0.2f, 0.2f, 45.0f);
+    movewall.back().SetMoveRange(glm::vec3(25, 1, -130), glm::vec3(25, 1, -110), 2.0f);
+    movewall.emplace_back(glm::vec3(25, 0, -115), glm::vec3(1.0f, 1.0f, 0.2f), 0.2f, 0.2f, -45.0f);
+    movewall.back().SetMoveRange(glm::vec3(25, 1, -130), glm::vec3(25, 1, -110), 2.0f);
     //--------------------------------------------------------------------------------------------
 
     for (auto& o : stageObjects)

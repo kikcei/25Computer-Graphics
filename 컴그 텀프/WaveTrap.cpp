@@ -91,3 +91,4 @@ void WaveTrap::Draw(const glm::mat4& view, const glm::mat4& proj, GLuint mvpLoc)
     glBindBuffer(GL_ARRAY_BUFFER, vbo_pyramid[1]);
     glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(pyramidColors), pyramidColors);
 }
+
