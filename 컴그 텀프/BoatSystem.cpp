@@ -1,30 +1,27 @@
-#include "BoatSystem.h"
+ï»¿#include "BoatSystem.h"
 #include "graphics.h"
-#include "globals.h" 
+#include "globals.h"
+#include "boat.h"
 #include <cmath>
 #include <vector>
+#include "Matrix.h"
 
-// =========================================================
-// ³»ºÎ ¼öÇĞ À¯Æ¿
-// =========================================================
 
-void BoatSystem::MatIdentity(float m[16])
-{
+// ---------------------------------------------------------
+// ë‚´ë¶€ ë§¤íŠ¸ë¦­ìŠ¤ ìœ í‹¸
+// ---------------------------------------------------------
+void BoatSystem::MatIdentity(float m[16]) {
     for (int i = 0; i < 16; i++) m[i] = 0;
     m[0] = m[5] = m[10] = m[15] = 1.0f;
 }
 
-void BoatSystem::MatTranslate(float m[16], float x, float y, float z)
-{
+void BoatSystem::MatTranslate(float m[16], float x, float y, float z) {
     MatIdentity(m);
-    m[12] = x;
-    m[13] = y;
-    m[14] = z;
+    m[12] = x;  m[13] = y;  m[14] = z;
 }
 
-void BoatSystem::MatRotateY(float m[16], float deg)
-{
-    float rad = deg * 3.141592f / 180.f;
+void BoatSystem::MatRotateY(float m[16], float deg) {
+    float rad = deg * M_PI / 180.f;
     float c = cos(rad), s = sin(rad);
 
     MatIdentity(m);
@@ -32,9 +29,8 @@ void BoatSystem::MatRotateY(float m[16], float deg)
     m[8] = -s;  m[10] = c;
 }
 
-void BoatSystem::MatRotateZ(float m[16], float deg)
-{
-    float rad = deg * 3.141592f / 180.f;
+void BoatSystem::MatRotateZ(float m[16], float deg) {
+    float rad = deg * M_PI / 180.f;
     float c = cos(rad), s = sin(rad);
 
     MatIdentity(m);
@@ -42,101 +38,57 @@ void BoatSystem::MatRotateZ(float m[16], float deg)
     m[4] = s;   m[5] = c;
 }
 
-void BoatSystem::MatPerspective(float m[16], float fovy, float aspect, float zNear, float zFar)
+void BoatSystem::MatMul(float out[16], float a[16], float b[16])
 {
-    float t = tan(fovy * 3.141592f / 180.f / 2.f);
-    MatIdentity(m);
-
-    m[0] = 1.f / (aspect * t);
-    m[5] = 1.f / t;
-    m[10] = -(zFar + zNear) / (zFar - zNear);
-    m[11] = -1.f;
-    m[14] = -(2.f * zFar * zNear) / (zFar - zNear);
-    m[15] = 0.f;
-}
-
-void BoatSystem::MatLookAt(float m[16], float ex, float ey, float ez,
-    float cx, float cy, float cz,
-    float ux, float uy, float uz)
-{
-    float fx = cx - ex, fy = cy - ey, fz = cz - ez;
-    float rl = 1.0f / sqrt(fx * fx + fy * fy + fz * fz);
-    fx *= rl; fy *= rl; fz *= rl;
-
-    float sx = fy * uz - fz * uy;
-    float sy = fz * ux - fx * uz;
-    float sz = fx * uy - fy * ux;
-    rl = 1.0f / sqrt(sx * sx + sy * sy + sz * sz);
-    sx *= rl; sy *= rl; sz *= rl;
-
-    float ux2 = sy * fz - sz * fy;
-    float uy2 = sz * fx - sx * fz;
-    float uz2 = sx * fy - sy * fx;
-
-    MatIdentity(m);
-    m[0] = sx;   m[4] = sy;   m[8] = sz;
-    m[1] = ux2;  m[5] = uy2;  m[9] = uz2;
-    m[2] = -fx;  m[6] = -fy;  m[10] = -fz;
-
-    m[12] = -(sx * ex + sy * ey + sz * ez);
-    m[13] = -(ux2 * ex + uy2 * ey + uz2 * ez);
-    m[14] = (fx * ex + fy * ey + fz * ez);
+    float r[16];
+    for (int row = 0; row < 4; row++)
+        for (int col = 0; col < 4; col++) {
+            r[row * 4 + col] =
+                a[row * 4 + 0] * b[0 * 4 + col] +
+                a[row * 4 + 1] * b[1 * 4 + col] +
+                a[row * 4 + 2] * b[2 * 4 + col] +
+                a[row * 4 + 3] * b[3 * 4 + col];
+        }
+    for (int i = 0; i < 16; i++) out[i] = r[i];
 }
 
 
 // =========================================================
-// ¸ğµ¨ ºôµå
+// ì´ˆê¸°í™”
 // =========================================================
-
-void BoatSystem::BuildModels()
-{
-    // ±âÁ¸ graphics.cpp ±â¹İÀ¸·Î ÀÛ¼º
-    // VAO ºôµå, ¼ÎÀÌ´õ ·Îµù, ¸Ş½¬ ·Îµù Á÷Á¢ ¿¬°á
-
-
-    
-
-    MatIdentity(gModel);
-    MatIdentity(gLeftModel);
-    MatIdentity(gRightModel);
-    MatIdentity(groundModel);
-}
-
-
-// =========================================================
-// ÃÊ±âÈ­
-// =========================================================
-
-void BoatSystem::Init()
-{
-    // globals.cpp ¿¡¼­ ¸¸µç ½ÇÁ¦ VAO/Shader °¡Á®¿À±â
+void BoatSystem::Init() {
     boatVAO = ::boatVAO;
     leftVAO = ::leftVAO;
     rightVAO = ::rightVAO;
     groundVAO = ::groundVAO;
 
-    // OBJ ·Î´õ°¡ Ã¤¿öÁØ ¸Ş½¬ °³¼ö
-    boatMeshCount = static_cast<int>(boatMesh.size());
-    rightMeshCount = static_cast<int>(rightMesh.size());
-    leftMeshCount = static_cast<int>(leftMesh.size());
+    boatMeshCount = (int)boatMesh.size();
+    rightMeshCount = (int)rightMesh.size();
+    leftMeshCount = (int)leftMesh.size();
 
-    // globals ÀÇ Àü¿ª shader »ç¿ë
     shader = ::shader;
+
+    MatIdentity(gModel);
+    MatIdentity(gLeftModel);
+    MatIdentity(gRightModel);
 }
 
 
 // =========================================================
-// Update
+// ë³´íŠ¸ ë¬¼ë¦¬ ì—…ë°ì´íŠ¸
 // =========================================================
-
 void BoatSystem::UpdateBoatPhysics(float dt)
 {
-    // ±âº» ¹æÇâÀ» 180µµ µÚÁı¾î¼­ »ç¿ë
-    const float baseYaw = 180.0f;
+    //  ë¨¼ì € íšŒì „ ì—…ë°ì´íŠ¸
+    boatRotY += boatRotVel;
+    boatRotVel *= 0.85f;   // ê°ì‡ 
 
-    float rad = (boatRotY + baseYaw) * 3.141592f / 180.f;
-    float dirX = -sin(rad);
-    float dirZ = -cos(rad);
+    //  íšŒì „ í›„ ë°©í–¥ ì—…ë°ì´íŠ¸
+    float baseYaw = 180.0f;
+    float rad = (boatRotY + baseYaw) * M_PI / 180.f;
+
+    float dirX = sin(rad);
+    float dirZ = cos(rad);
 
     velX = velX * 0.9f + dirX * speed * 0.1f;
     velZ = velZ * 0.9f + dirZ * speed * 0.1f;
@@ -148,58 +100,121 @@ void BoatSystem::UpdateBoatPhysics(float dt)
     if (speed < 0.0001f) speed = 0;
 }
 
+
+
+// =========================================================
+// ë…¸ ìŠ¤í”„ë§ ì• ë‹ˆë©”ì´ì…˜
+// =========================================================
 void BoatSystem::UpdateOars(float dt)
 {
-    rightRotZ += rightVelZ;
-    rightVelZ *= 0.85f;
-    rightVelZ += (0 - rightRotZ) * 0.02f;
-
-    leftRotZ += leftVelZ;
-    leftVelZ *= 0.85f;
-    leftVelZ += (0 - leftRotZ) * 0.02f;
+    // RIGHT OAR
+    {
+        float spring = (oarRestAngle - rightRotZ) * oarSpringK;
+        rightVelZ *= oarDamping;
+        rightVelZ += spring;
+        rightRotZ += rightVelZ;
+    }
+    // LEFT OAR
+    {
+        float spring = (oarRestAngle - leftRotZ) * oarSpringK;
+        leftVelZ *= oarDamping;
+        leftVelZ += spring;
+        leftRotZ += leftVelZ;
+    }
 }
 
+
+// =========================================================
+// íŠ¸ëœìŠ¤í¼ ì—…ë°ì´íŠ¸ (íšŒì „ í›„ ì´ë™ = ì˜¬ë°”ë¥¸ ìˆœì„œ)
+// =========================================================
 void BoatSystem::UpdateTransforms()
 {
-    const float baseYaw = 180.0f;
+    float Tboat[16], Rboat[16], Sboat[16], TR[16];
 
-    // ========== Boat ==========
-    // ±âº» °¢µµ¿¡ 180µµ¸¦ ´õÇØ¼­ ¹İ´ë ¹æÇâ ¹Ù¶óº¸°Ô
-    MatRotateY(gModel, boatRotY + baseYaw);
+    // Scale
+    MatIdentity(Sboat);
+    Sboat[0] = boatScale;
+    Sboat[5] = boatScale;
+    Sboat[10] = boatScale;
 
-    const float s = boatScale;
-    gModel[0] *= s; gModel[1] *= s; gModel[2] *= s;
-    gModel[4] *= s; gModel[5] *= s; gModel[6] *= s;
-    gModel[8] *= s; gModel[9] *= s; gModel[10] *= s;
+    // Rotation
+    MatRotateY(Rboat, boatRotY + 180.0f);
 
-    gModel[12] = boatPosX;
-    gModel[13] = boatPosY;
-    gModel[14] = boatPosZ;
+    // Translation
+    MatTranslate(Tboat, boatPosX, boatPosY, boatPosZ);
 
-    const float ps = paddleScale;
-    // ========= Left Oar =========
-    MatRotateZ(gLeftModel, leftRotZ);
-    gLeftModel[0] *= ps; gLeftModel[1] *= ps; gLeftModel[2] *= ps;
-    gLeftModel[4] *= ps; gLeftModel[5] *= ps; gLeftModel[6] *= ps;
-    gLeftModel[8] *= ps; gLeftModel[9] *= ps; gLeftModel[10] *= ps;
+    // TR = T * R
+    MatMul(TR, Tboat, Rboat);
 
-    gLeftModel[12] = boatPosX + 0.45f;
-    gLeftModel[13] = boatPosY - 0.05f;
-    gLeftModel[14] = boatPosZ + 0.40f;
+    // gModel = (T*R) * S
+    MatMul(gModel, TR, Sboat);
 
-    // ========= Right Oar =========
-    MatRotateZ(gRightModel, rightRotZ);
-    gRightModel[0] *= ps; gRightModel[1] *= ps; gRightModel[2] *= ps;
-    gRightModel[4] *= ps; gRightModel[5] *= ps; gRightModel[6] *= ps;
-    gRightModel[8] *= ps; gRightModel[9] *= ps; gRightModel[10] *= ps;
 
-    gRightModel[12] = boatPosX + 0.08f;
-    gRightModel[13] = boatPosY - 0.22f;
-    gRightModel[14] = boatPosZ + 0.27f;
+    // ======================================================
+    // RIGHT OAR
+    // ======================================================
+    {
+        float Rlocal[16], Tlocal[16], local[16];
 
-   
+        MatRotateZ(Rlocal, -rightRotZ);
+
+        float Tpos[3] = { -0.03f, -0.15f, -0.3f };
+
+        float x = Tpos[0], y = Tpos[1], z = Tpos[2];
+
+        float rad = (boatRotY + 180.0f) * M_PI / 180.0f;
+        float cosr = cos(rad), sinr = sin(rad);
+
+        float rx = x * cosr - z * sinr;
+        float rz = x * sinr + z * cosr;
+
+        MatTranslate(Tlocal, rx, y, rz);
+
+        MatMul(local, Tlocal, Rlocal);
+        MatMul(gRightModel, gModel, local);
+    }
+
+
+
+
+    // ======================================================
+    // LEFT OAR
+    // ======================================================
+    {
+        float Rlocal[16], Tlocal[16], local[16];
+
+        // ë…¸ ì “ëŠ” ì• ë‹ˆë©”ì´ì…˜
+        MatRotateZ(Rlocal, leftRotZ);
+
+        // LEFT ë…¸ì˜ ë¡œì»¬ ìœ„ì¹˜
+        float Tpos[3] = { 0.5f, 0.0f, -0.2f };
+
+        float x = Tpos[0], y = Tpos[1], z = Tpos[2];
+
+        // ë³´íŠ¸ íšŒì „ì— ì˜í•´ ì¢Œí‘œ íšŒì „
+        float rad = (boatRotY + 180.0f) * M_PI / 180.0f;
+        float cosr = cos(rad), sinr = sin(rad);
+
+        float lx = x * cosr - z * sinr;
+        float lz = x * sinr + z * cosr;
+
+        // ë³€í™˜í–‰ë ¬ ì ìš©
+        MatTranslate(Tlocal, lx, y, lz);
+
+        MatMul(local, Tlocal, Rlocal);
+        MatMul(gLeftModel, gModel, local);
+    }
+
+
+
+
+
 }
 
+
+// =========================================================
+// Update()
+// =========================================================
 void BoatSystem::Update(float dt)
 {
     UpdateBoatPhysics(dt);
@@ -209,15 +224,12 @@ void BoatSystem::Update(float dt)
 
 
 // =========================================================
-// ·»´õ¸µ
+// Render()
 // =========================================================
-
 void BoatSystem::Render()
 {
     glUseProgram(shader);
 
-   
-    // ===== ¿©±â ¾Æ·¡ºÎÅÍ´Â ¿ø·¡ ³Ê ÄÚµå ±×´ë·Î =====
     // Ground
     glUniformMatrix4fv(glGetUniformLocation(shader, "uModel"), 1, GL_FALSE, groundModel);
     glUniform3f(glGetUniformLocation(shader, "uColor"), 0.2f, 0.3f, 0.9f);
@@ -245,21 +257,30 @@ void BoatSystem::Render()
 
 
 // =========================================================
-// ÀÔ·Â Ã³¸®
+// ì…ë ¥ ì²˜ë¦¬
 // =========================================================
-
 void BoatSystem::KeyDown(unsigned char key)
 {
-    if (key == 'w') speed += 0.03f;
-    if (key == 's') speed -= 0.03f;
-    if (key == 'f') boatRotY += 1.f;
-    if (key == 'd') boatRotY -= 1.f;
+    if (key == 'z') // LEFT stroke
+    {
+        boatRotVel -= 0.3f;   // ì™¼ìª½ stroke â†’ ë³´íŠ¸ ì˜¤ë¥¸ìª½ìœ¼ë¡œ ëŒë ¤ì•¼ í•¨
+        speed += 0.3f;
 
-    if (key == 'j') rightVelZ -= 1.0f;
-    if (key == 'k') leftVelZ -= 1.0f;
+        leftRotZ = oarPullAngle;
+        leftVelZ = -oarSnapForce;
+    }
+
+    if (key == 'm') // RIGHT stroke
+    {
+        boatRotVel += 0.3f;   // ì˜¤ë¥¸ìª½ stroke â†’ ë³´íŠ¸ ì™¼ìª½ìœ¼ë¡œ ëŒë ¤ì•¼ í•¨
+        speed += 0.3f;
+
+        rightRotZ = -oarPullAngle;
+        rightVelZ = oarSnapForce;
+    }
+
 }
 
 void BoatSystem::KeyUp(unsigned char key)
 {
-    // Å°¿¡¼­ ¼Õ ¶¿ ¶§ Ã³¸®ÇÒ °Å ÀÖÀ¸¸é ¿©±â¿¡
 }

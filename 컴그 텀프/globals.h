@@ -30,6 +30,7 @@ extern float boatScale;
 extern float boatPosX;
 extern float boatPosY;
 extern float boatPosZ;
+extern float boatRotVel;
 
 // Oars
 extern float rightRotZ;
@@ -52,6 +53,13 @@ extern float maxSpeed;
 
 extern bool sPressed;
 extern bool kPressed;
+
+extern float oarRestAngle;
+extern float oarPullAngle;
+extern float oarSnapForce;
+extern float oarSpringK;
+extern float oarDamping;
+
 
 // Camera
 extern float camX, camY, camZ;

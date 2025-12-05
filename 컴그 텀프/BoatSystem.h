@@ -4,12 +4,18 @@
 
 class BoatSystem
 {
+
 public:
+    static BoatSystem& Instance() {
+        static BoatSystem inst;
+        return inst;
+    }
+
     void Init();
 
     void Update(float dt);
     void Render();
-
+    void Idle();
     void KeyDown(unsigned char key);
     void KeyUp(unsigned char key);
 
@@ -59,6 +65,8 @@ private:
     void MatLookAt(float m[16], float eyeX, float eyeY, float eyeZ,
         float cenX, float cenY, float cenZ,
         float upX, float upY, float upZ);
+    void MatMul(float out[16], float a[16], float b[16]);
+
 
     void BuildModels();
 };

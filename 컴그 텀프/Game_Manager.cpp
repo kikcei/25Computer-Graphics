@@ -38,13 +38,17 @@ void GameManager::LoadStage(int stage)
     movewall.clear();
 
     movewall.emplace_back(
-        glm::vec3(1, 2, -20),     // 벽 위치
-        glm::vec3(1.2, 1.2, 0.4f),    // 벽 크기
+        glm::vec3(0,0,0),     // 벽 위치
+        glm::vec3(2.0, 2.0, 1.0f),    // 벽 크기
         0.20f,                    // 스파이크 크기
         0.2f,                     // 간격
         0.0f                     // 회전
     );
-
+    movewall.back().SetMoveRange(
+        glm::vec3(-3, 1, -20),
+        glm::vec3(3, 1, -10),
+        1.0f // 속도
+    );
     if (stage == 1)
     {
         stageObjects = {
@@ -250,6 +254,9 @@ void GameManager::Update(float dt)
 
     for (auto& w : basicLeft)
         w.Update_Left(dt);
+
+    for (auto& w : movewall)
+        w.Update(dt);
 }
 
 void GameManager::Draw(const glm::mat4& view, const glm::mat4& proj, GLuint mvpLoc)

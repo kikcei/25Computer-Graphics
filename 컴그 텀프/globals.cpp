@@ -26,26 +26,36 @@ float boatScale = 0.025f;
 float boatPosX = 0.0f;
 float boatPosY = 90.0f;
 float boatPosZ = 0.0f;
+float boatRotVel = 0.0f;
 
+// ========= Oars =========
 // ========= Oars =========
 float rightRotZ = 0.0f;
 float rightVelZ = 0.0f;
 float leftRotZ = 0.0f;
 float leftVelZ = 0.0f;
+
 // 패들 크기
-float paddleScale = 0.03f;   // 패들 크기 5%
+float paddleScale = 0.03f;
+
+// ========= Oar Spring Physics =========
+float oarRestAngle = 0.0f;     // 기본 각도
+float oarPullAngle = 10.0f;    // 뒤로 젖힐 최대 각도
+float oarSnapForce = 4.0f;     // 앞으로 튕기는 힘
+float oarSpringK = 0.15f;      // 탄성 계수
+float oarDamping = 0.82f;      // 감쇠
 
 // ========= Movement =========
 float velX = 0.0f;
 float velZ = 0.0f;
 
-float accel = 0.40f;
-float driftFactor = 0.995f;
-float turnAngle = 1.0f;
+float accel = 0.1f;
+float driftFactor = 0.5f;
+float turnAngle = 2.0f;
 
 float speed = 0.0f;
 float acceleration = 0.03f;
-float deceleration = 0.995f;
+float deceleration = 0.95f;
 float maxSpeed = 2.0f;
 
 bool sPressed = false;
